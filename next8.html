@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> love </title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 400px;
+            height: 800px;
+            background-color: lightpink;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .divider {
+            width: 80%;
+            height: 3px; /* Increased height for a bolder look */
+            background-color: black;
+            margin: 20px 0;
+            display: none; /* Initially hidden */
+        }
+        .divider.revealed {
+            display: block; /* Show when revealed */
+        }
+        .blurred-text {
+            filter: blur(5px);
+            transition: filter 0.3s;
+        }
+        .blurred-text.revealed {
+            filter: blur(0);
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .nav-buttons {
+            display: none;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .nav-buttons.revealed {
+            display: flex;
+        }
+        .image-container {
+            display: none;
+            margin-top: 20px;
+        }
+        .image-container.revealed {
+            display: block;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+      <p> Thone ,orange might cry after seeing this .<br> Orange i am sorry to bring him up but listen he has to say something to you . </p>
+        
+        <button id="revealButton" onclick="revealText()"> ❤️</button>
+        <div class="divider" id="divider"></div>
+        <p class="blurred-text" id="moreText"> Love you maria ❤️ Thanks for genuienly taking care of my owner and me. I had fell in love with your care. Please don't blame yourself. I know you tried your best and i am glad i was in your care. Please take care of my owner so he gets well soon.Focus on it .You'll find a way kind hearted lady ❤️</p>
+        <div class="image-container" id="imageContainer">
+            <img src="pic5.jpg" alt="Revealed Image">
+        </div>
+        <div class="nav-buttons" id="navButtons">
+            <button onclick="navigate('previous')">Previous</button>
+            <button onclick="navigate('next')">Next</button>
+        </div>
+    </div>
+
+    <script>
+        function revealText() {
+            document.getElementById('moreText').classList.add('revealed');
+            document.getElementById('navButtons').classList.add('revealed');
+            document.getElementById('revealButton').style.display = 'none';
+            document.getElementById('divider').classList.add('revealed');
+            document.getElementById('imageContainer').classList.add('revealed');
+        }
+
+        function navigate(direction) {
+            if (direction === 'next') {
+                window.location.href = 'next7.html';
+            } else if (direction === 'previous') {
+                window.location.href = 'next6.html';
+            }
+        }
+    </script>
+</body>
+</html>
