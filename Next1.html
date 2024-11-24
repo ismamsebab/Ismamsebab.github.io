@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nasty thirsty?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 400px;
+            height: 500px;
+            background-color: lightpink;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .divider {
+            width: 80%;
+            height: 3px; /* Increased height for a bolder look */
+            background-color: black;
+            margin: 20px 0;
+            display: none; /* Initially hidden */
+        }
+        .divider.revealed {
+            display: block; /* Show when revealed */
+        }
+        .blurred-text {
+            filter: blur(5px);
+            transition: filter 0.3s;
+        }
+        .blurred-text.revealed {
+            filter: blur(0);
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .nav-buttons {
+            display: none;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .nav-buttons.revealed {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p> In the morning moo was having cakes as breakfast. She had 3 cakes but she only could eat two . The remaining is one is the only cake she can't have taste of ...Guess why?</p>
+        <button id="revealButton" onclick="revealText()">Hmm?🤔</button>
+        <div class="divider" id="divider"></div>
+        <p class="blurred-text" id="moreText">Because The 3rd cake is known as her booty <br>
+(let fox by the way for analysis purpose😜) 
+        </p>
+        
+        <div class="nav-buttons" id="navButtons">
+            <button onclick="navigate('previous')">Previous</button>
+            <button onclick="navigate('next')">Next</button>
+        </div>
+    </div>
+
+    <script>
+        function revealText() {
+            document.getElementById('moreText').classList.add('revealed');
+            document.getElementById('navButtons').classList.add('revealed');
+            document.getElementById('revealButton').style.display = 'none';
+            document.getElementById('divider').classList.add('revealed');
+        }
+
+        function navigate(direction) {
+            if (direction === 'next') {
+                window.location.href = 'next2.html';
+            } else if (direction === 'previous') {
+                window.location.href = 'next1.html';
+            }
+        }
+    </script>
+</body>
+</html>
