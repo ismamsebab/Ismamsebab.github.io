@@ -54,11 +54,11 @@
 })();
 */
 const messages = [
-    "Are you sure?",
-    "Really sure??",
-    "Are you positive?",
-    "Pookie please...",
-    "Just think about it!",
+    "বলেন কি?",
+    "বুঝে বলেন !??",
+    "আরেহ আবার?",
+    "ধুরু মিয়া এটা তো সবাই জানে...",
+    "আবার ভাবেন !",
     "If you say no, I will be really sad...",
     "I will be very sad...",
     "I will be very very very sad...",
