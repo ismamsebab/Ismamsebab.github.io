@@ -19,7 +19,7 @@ function handleNo() {
 
     // First No Click
     if (noClickCount === 1) {
-        title.innerText = "Are you sure? 🥺";
+        title.innerText = "Don't you love? 🥺";
     } 
     // Subsequent No Clicks
     else {
