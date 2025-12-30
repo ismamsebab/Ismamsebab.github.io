@@ -3,20 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>দেশনেতা</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>For You ❤️</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div class="container">
-        <h1> দেশনেতার ভাগ কত?</h1>
-        <div class="buttons">
-            <button class="yes-button" onclick="handleYesClick()">১০%</button>
-            <button class="no-button" onclick="handleNoClick()">কোনো ভাগ নেই </button>
+        
+        <div id="screen-1" class="screen">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5eGxpNXRod3I5ZnI2eXF6bm02eDBlYXF6bm02eDBlYXF6bm02ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/L3jfWl55yDfs9RzJq8/giphy.gif" alt="Cute Fox" class="gif-img">
+            <h1>My love, do you love fox? 🦊</h1>
+            <div class="buttons">
+                <button id="yes-btn" onclick="goToScreen(2)">YES</button>
+                <button id="no-btn" onclick="handleNo()">NO</button>
+            </div>
         </div>
-        <div class="gif_container">
-            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW5lenZyZHI5OXM2eW95b3pmMG40cWVrMDhtNjVuM3A4dGNxa2g2dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/VM1fcpu2bKs1e2Kdbj/giphy.gif" alt="Cute GIF">
+
+        <div id="screen-2" class="screen hidden">
+            <img src="https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif" alt="Flower" class="gif-img">
+            <h1>You've chosen the right person! 🌹</h1>
+            <p>I knew you were the one.</p>
+            <button class="action-btn" onclick="goToScreen(3)">Your lover has something to show you</button>
         </div>
+
+        <div id="screen-3" class="screen hidden">
+            <div class="photo-container">
+                <img src="https://placehold.co/400x600/pink/white?text=Our+Photo+1" alt="Us" class="photo">
+                </div>
+            <button class="action-btn bottom-btn" onclick="goToScreen(4)">Here's a letter 💌</button>
+        </div>
+
+        <div id="screen-4" class="screen hidden">
+            <img src="https://media.giphy.com/media/3oz8xBkRsgPTreh7qv/giphy.gif" alt="Gift Box" class="gif-img" id="gift-gif">
+            <h1>A gift for you...</h1>
+            <button class="action-btn" onclick="goToScreen(5)">Kiss to open it 💋</button>
+        </div>
+
+        <div id="screen-5" class="screen hidden">
+            <div class="letter-paper">
+                <h2>To my favorite person,</h2>
+                <p>
+                    I am so incredibly sorry. [Write your heartfelt apology here]. 
+                    I love you more than anything.
+                </p>
+                <p>Always yours,</p>
+                <p><strong>[Your Name]</strong></p>
+            </div>
+        </div>
+
     </div>
+
     <script src="script.js"></script>
 </body>
+
 </html>
