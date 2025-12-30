@@ -1,121 +1,101 @@
-/* General Setup */
+/* style.css */
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif; /* You can change this to 'Courier New' for a typewriter look */
-    background-color: #ffe6e6; /* Light pink background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    overflow: hidden; /* Prevents scrolling on screens that don't need it */
-}
-
-.container {
-    text-align: center;
-    width: 90%;
-    max-width: 400px; /* Keeps it looking like a mobile app even on desktop */
-}
-
-/* Screen Management */
-.screen {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffe6e6; /* Soft Pink */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    animation: fadeIn 0.5s ease-in-out;
+    min-height: 100vh; /* Full screen height */
+    text-align: center;
+    overflow-x: hidden;
 }
 
-.hidden {
-    display: none;
-}
-
-/* Images & GIFs */
-.gif-img {
-    max-width: 80%;
-    border-radius: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.photo-container {
-    width: 100%;
-    height: 60vh;
-    overflow: hidden;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
-
-.photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures your photo fills the screen nicely */
-}
-
-/* Typography */
 h1 {
     color: #d63384;
-    font-size: 1.5rem;
-    margin-bottom: 30px;
+    font-size: 1.8rem;
+    margin: 20px;
 }
 
-p {
-    color: #555;
-    line-height: 1.6;
+.gif-container img {
+    width: 80%;
+    max-width: 300px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
 }
 
-/* Buttons */
-.buttons {
+/* Button Container */
+.btn-box {
     display: flex;
     gap: 20px;
     justify-content: center;
     align-items: center;
-    height: 60px; /* Fixed height to allow growth without layout jumping */
-}
-
-button {
-    border: none;
-    border-radius: 25px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-#yes-btn {
-    background-color: #28a745; /* Green */
-    color: white;
-}
-
-#no-btn {
-    background-color: #dc3545; /* Red */
-    color: white;
-}
-
-.action-btn {
-    background-color: #d63384; /* Pink */
-    color: white;
-    padding: 15px 30px;
+    flex-wrap: wrap; /* Keeps buttons nice on mobile */
     margin-top: 20px;
-    font-size: 1.1rem;
+}
+
+/* Base Button Style */
+a.btn, button.btn {
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    transition: transform 0.2s, background-color 0.2s;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+/* Green YES Button */
+.yes {
+    background-color: #28a745;
+    box-shadow: 0 4px 0 #1e7e34;
+}
+
+.yes:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+
+/* Red NO Button */
+.no {
+    background-color: #dc3545;
+    box-shadow: 0 4px 0 #bd2130;
+}
+
+.no:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+
+/* Special styling for the Photo/Colleague page */
+.full-screen-photo {
     width: 100%;
+    height: 70vh; /* Takes up 70% of screen height */
+    object-fit: cover;
+    border-radius: 0 0 20px 20px;
+}
+.bottom-bar {
+    position: fixed;
+    bottom: 30px;
+    width: 100%;
+    text-align: center;
 }
 
-/* The Letter Styling */
-.letter-paper {
-    background-color: #fff;
+/* Letter Styling */
+.paper {
+    background: white;
     padding: 30px;
+    margin: 20px;
     border-radius: 5px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    max-width: 400px;
     text-align: left;
-    border: 1px solid #ddd;
-    background-image: linear-gradient(#f1f1f1 1px, transparent 1px);
-    background-size: 100% 1.5em; /* Lined paper effect */
-}
-
-/* Animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    line-heig
+        ht: 1.6;
 }
