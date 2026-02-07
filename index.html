@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Sabrina</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        
+        <div id="step1">
+            <h1>Flowers for you my sweetheart, Sabrina </h1>
+            <img src="images/dudu-giving-flowers-bubu-flowers.gif" alt="Flower GIF" class="flower-gif">
+            <p class="question">Do you accept my gift?</p>
+            <div class="buttons">
+                <button class="btn yes-btn" onclick="goToStep2()">Yes</button>
+                <button class="btn no-btn" id="noBtn" onclick="handleNoClick()">No</button>
+            </div>
+        </div>
+
+        <div id="step2" class="hidden">
+            <img src="images/icon1.png" class="doodle d1" alt="flower">
+            <img src="images/icon1.png" class="doodle d2" alt="flower">
+            <img src="images/icon1.png" class="doodle d3" alt="flower">
+
+            <div class="photo-frame">
+                <img src="images/photo1.png" class="slideshow-img active">
+                <img src="images/photo2.jpeg" class="slideshow-img">
+                <img src="images/photo3.png" class="slideshow-img">
+                <img src="images/photo4.webp" class="slideshow-img">
+                <img src="images/photo5.jpeg" class="slideshow-img">
+                <img src="images/photo6.jpg" class="slideshow-img">
+            </div>
+
+            <p class="instruction-text">Images above are slideshow <br> And I have something to say...</p>
+            <button class="next-step-btn" onclick="goToStep3()">Read Letter &rarr;</button>
+        </div>
+
+        <div id="step3" class="hidden">
+            <div class="paper">
+                <div class="lines">
+                    <div class="text">
+                        Dear Sabrina, <br><br>
+                        Happy Rose Day! 🌹 <br>
+                        I wanted to make something special for you because you are special to me. 
+                        Every moment with you is feels like a dream , a exiciting roller coaster ride of emotions , i love it !!. <br><br>
+                        I hope you liked this rose day proposal , umm reall. flowers some day soon honey. <br>
+                        and Wait for propose day tomorrow!... ❤️ <br><br>
+                        Yours, <br>
+                        [Sebab]
+                    </div>
+                </div>
+                <div class="holes hole-top"></div>
+                <div class="holes hole-middle"></div>
+                <div class="holes hole-bottom"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
