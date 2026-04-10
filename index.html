@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I'm Sorry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #fdf6ee;
+      --ink: #1a1208;
+      --rose: #c0544a;
+      --rose-light: #e8a09a;
+      --gold: #b8924a;
+      --muted: #7a6652;
+      --paper: #f5ead8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--ink);
+      font-family: 'Lora', serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Falling petals */
+    .petal {
+      position: fixed;
+      top: -40px;
+      width: 10px;
+      height: 14px;
+      border-radius: 50% 0 50% 0;
+      opacity: 0;
+      animation: fall linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes fall {
+      0%   { transform: translateX(0) rotate(0deg); opacity: 0.7; top: -40px; }
+      100% { transform: translateX(60px) rotate(360deg); opacity: 0; top: 110vh; }
+    }
+
+    /* Heartbeat background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(192,84,74,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 70%, rgba(184,146,74,0.06) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* Header cry */
+    .header-emoji {
+      font-size: 64px;
+      animation: pulse-emoji 2.5s ease-in-out infinite;
+      margin-bottom: 8px;
+      filter: drop-shadow(0 4px 12px rgba(192,84,74,0.25));
+    }
+    @keyframes pulse-emoji {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+
+    .please-strip {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(13px, 3.5vw, 17px);
+      color: var(--rose);
+      letter-spacing: 0.12em;
+      text-align: center;
+      animation: fadeSlideIn 1s ease both;
+      animation-delay: 0.3s;
+      opacity: 0;
+      margin-bottom: 36px;
+    }
+    .please-strip span {
+      opacity: 0.5;
+      margin: 0 6px;
+    }
+
+    /* Letter paper */
+    .letter {
+      background: var(--paper);
+      border: 1px solid rgba(184,146,74,0.25);
+      border-radius: 4px;
+      padding: 52px 48px;
+      width: 100%;
+      position: relative;
+      box-shadow:
+        0 2px 0 rgba(184,146,74,0.15),
+        0 8px 40px rgba(26,18,8,0.10),
+        inset 0 1px 0 rgba(255,255,255,0.6);
+      animation: fadeSlideIn 1s ease both;
+      animation-delay: 0.6s;
+      opacity: 0;
+    }
+
+    /* Torn-paper top edge */
+    .letter::before {
+      content: '';
+      position: absolute;
+      top: -6px; left: 0; right: 0;
+      height: 6px;
+      background: var(--paper);
+      clip-path: polygon(
+        0% 100%, 2% 20%, 4% 80%, 6% 10%, 8% 90%, 10% 30%,
+        12% 70%, 14% 15%, 16% 85%, 18% 40%, 20% 75%, 22% 20%,
+        24% 60%, 26% 10%, 28% 80%, 30% 35%, 32% 70%, 34% 20%,
+        36% 55%, 38% 10%, 40% 65%, 42% 25%, 44% 75%, 46% 15%,
+        48% 60%, 50% 30%, 52% 80%, 54% 20%, 56% 65%, 58% 10%,
+        60% 70%, 62% 30%, 64% 80%, 66% 15%, 68% 60%, 70% 25%,
+        72% 75%, 74% 20%, 76% 65%, 78% 10%, 80% 70%, 82% 30%,
+        84% 80%, 86% 15%, 88% 60%, 90% 25%, 92% 75%, 94% 20%,
+        96% 65%, 98% 35%, 100% 100%
+      );
+    }
+
+    /* Red line rule like lined paper */
+    .letter::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 72px;
+      width: 1px;
+      background: rgba(192,84,74,0.15);
+    }
+
+    .letter-salutation {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .letter-body {
+      font-size: clamp(15px, 2.5vw, 17px);
+      line-height: 2;
+      color: var(--ink);
+      font-family: 'Lora', serif;
+    }
+
+    .letter-body p {
+      margin-bottom: 20px;
+    }
+
+    .letter-body .highlight {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--rose);
+      font-size: 1.05em;
+    }
+
+    .letter-sign {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--muted);
+      margin-top: 32px;
+    }
+
+    /* Forgive me section */
+    .forgive-section {
+      margin-top: 48px;
+      text-align: center;
+      animation: fadeSlideIn 1s ease both;
+      animation-delay: 1s;
+      opacity: 0;
+      width: 100%;
+    }
+
+    .forgive-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(22px, 5vw, 36px);
+      color: var(--ink);
+      letter-spacing: 0.02em;
+      margin-bottom: 6px;
+    }
+
+    .please-please {
+      font-family: 'Lora', serif;
+      font-size: clamp(13px, 3vw, 16px);
+      color: var(--rose);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      animation: breathe 2s ease-in-out infinite;
+    }
+    @keyframes breathe {
+      0%, 100% { opacity: 1; letter-spacing: 0.3em; }
+      50% { opacity: 0.5; letter-spacing: 0.5em; }
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      padding: 14px 44px;
+      border-radius: 2px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      letter-spacing: 0.08em;
+      position: relative;
+    }
+
+    .btn-yes {
+      background: var(--rose);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(192,84,74,0.35);
+    }
+    .btn-yes:hover {
+      background: #a8403a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(192,84,74,0.45);
+    }
+    .btn-yes:active { transform: translateY(0); }
+
+    .btn-no {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid rgba(122,102,82,0.3);
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+    .btn-no:hover {
+      /* no hover — it's non-clickable on purpose */
+      background: transparent;
+    }
+
+    .no-hint {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 10px;
+      font-style: italic;
+      opacity: 0.6;
+      letter-spacing: 0.05em;
+    }
+
+    /* Thank you overlay */
+    .thankyou-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(253,246,238,0.97);
+      z-index: 100;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      animation: fadeIn 0.6s ease;
+    }
+    .thankyou-overlay.active { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .sorry-eyes {
+      font-size: 100px;
+      animation: eyeAnim 1.5s ease-in-out infinite alternate;
+      filter: drop-shadow(0 8px 24px rgba(192,84,74,0.3));
+    }
+    @keyframes eyeAnim {
+      from { transform: scale(1) rotate(-5deg); }
+      to   { transform: scale(1.08) rotate(5deg); }
+    }
+
+    .thankyou-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 7vw, 52px);
+      color: var(--rose);
+      font-style: italic;
+      text-align: center;
+    }
+
+    .thankyou-sub {
+      font-family: 'Lora', serif;
+      font-size: clamp(14px, 3vw, 18px);
+      color: var(--muted);
+      text-align: center;
+      max-width: 380px;
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    .hearts-float {
+      display: flex;
+      gap: 12px;
+      font-size: 28px;
+      animation: floatHearts 2s ease-in-out infinite alternate;
+    }
+    @keyframes floatHearts {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-12px); }
+    }
+
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 520px) {
+      .letter { padding: 36px 24px; }
+      .letter::after { left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Petals -->
+  <script>
+    const colors = ['#e8a09a','#c0544a','#d4937a','#f0c8c0','#b8924a'];
+    for (let i = 0; i < 18; i++) {
+      const p = document.createElement('div');
+      p.className = 'petal';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      p.style.animationDuration = (6 + Math.random() * 8) + 's';
+      p.style.animationDelay = (Math.random() * 10) + 's';
+      p.style.width = (8 + Math.random() * 8) + 'px';
+      p.style.height = (10 + Math.random() * 10) + 'px';
+      p.style.borderRadius = Math.random() > 0.5 ? '50% 0 50% 0' : '0 50% 0 50%';
+      document.body.appendChild(p);
+    }
+  </script>
+
+  <div class="page">
+
+    <div class="header-emoji">😔</div>
+
+    <div class="please-strip">
+      please <span>·</span> please <span>·</span> please <span>·</span> please <span>·</span> please
+    </div>
+
+    <div class="letter">
+      <div class="letter-salutation">To the one I hurt,</div>
+      <div class="letter-body">
+        <p>
+          That was the time when someone you love — who <span class="highlight">should</span> have taken a step forward to save you, to defend you — chose silence instead.
+        </p>
+        <p>
+          The man being a coward in that moment is a <span class="highlight">disappointing, humiliating</span> situation, and an unexpected emotional damage. I've been that man.
+        </p>
+        <p>
+          <span class="highlight">I'm really sorry.</span> I apologize sincerely from my heart and I assure you — that will never happen again. The cause of it was my PTSD response. But I will overcome it. I am working on it. For you, and for me.
+        </p>
+        <p>
+          Please forgive me.
+        </p>
+      </div>
+      <div class="letter-sign">— with all my heart 🌹</div>
+    </div>
+
+    <div class="forgive-section">
+      <div class="forgive-text">Will you forgive me?</div>
+      <div class="please-please">please &nbsp;·&nbsp; please &nbsp;·&nbsp; please</div>
+
+      <div class="btn-row">
+        <button class="btn btn-yes" onclick="showThankYou()">Yes 🌸</button>
+        <button class="btn btn-no" disabled title="This is not an option 🥺">No</button>
+      </div>
+      <div class="no-hint">(the "No" button doesn't work — because there's no world where I accept it 🥺)</div>
+    </div>
+
+  </div>
+
+  <!-- Thank you overlay -->
+  <div class="thankyou-overlay" id="thankyouOverlay">
+    <div class="sorry-eyes">🥹</div>
+    <div class="thankyou-title">Thank you...<br/>truly.</div>
+    <div class="thankyou-sub">
+      You have no idea how much this means to me.<br/>
+      I promise I'll be better — always, for you. 🌹
+    </div>
+    <div class="hearts-float">🌸 &nbsp; 💗 &nbsp; 🌸</div>
+  </div>
+
+  <script>
+    function showThankYou() {
+      document.getElementById('thankyouOverlay').classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
