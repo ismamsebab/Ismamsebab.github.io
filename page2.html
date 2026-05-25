@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Heart Speaks 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --rose: #f4a7b9;
+      --deep-rose: #e07b95;
+      --blush: #fde8ee;
+      --lavender: #d4b8e0;
+      --cream: #fff8f0;
+      --gold: #d4af7a;
+      --dark: #2a1a22;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #0d0810;
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+      cursor: none;
+      color: var(--blush);
+    }
+
+    .cursor {
+      position: fixed; width: 12px; height: 12px;
+      background: var(--rose); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s;
+      mix-blend-mode: screen;
+    }
+    .cursor-trail {
+      position: fixed; width: 30px; height: 30px;
+      border: 1px solid var(--rose); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: left 0.15s ease, top 0.15s ease, opacity 0.3s;
+      opacity: 0.5;
+    }
+
+    #starfield {
+      position: fixed; inset: 0;
+      z-index: 0; pointer-events: none;
+    }
+
+    .petal-container {
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 1; overflow: hidden;
+    }
+    .petal {
+      position: absolute; top: -40px;
+      border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+      opacity: 0;
+      animation: falling linear infinite;
+    }
+    @keyframes falling {
+      0%   { opacity: 0; transform: translateY(-40px) rotate(0deg); }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.4; }
+      100% { opacity: 0; transform: translateY(110vh) rotate(540deg) translateX(50px); }
+    }
+
+    /* ── Page nav ── */
+    .page-nav {
+      position: fixed; top: 2rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 0.6rem; z-index: 100;
+      animation: fadeIn 1s ease 0.5s both;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(244,167,185,0.3);
+      border: 1px solid rgba(244,167,185,0.5);
+      transition: all 0.3s;
+      cursor: none;
+    }
+    .nav-dot.active { background: var(--rose); transform: scale(1.3); }
+
+    /* ── Section wrapper ── */
+    .section {
+      position: relative; min-height: 100vh;
+      z-index: 2; display: flex;
+      flex-direction: column; align-items: center;
+      justify-content: center; padding: 5rem 2rem;
+    }
+
+    /* ── Back link ── */
+    .back-link {
+      position: fixed; top: 2rem; left: 2rem; z-index: 100;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem; color: rgba(244,167,185,0.6);
+      text-decoration: none; letter-spacing: 0.1em;
+      text-transform: uppercase; cursor: none;
+      transition: color 0.3s;
+      animation: fadeIn 1s ease 0.3s both;
+    }
+    .back-link:hover { color: var(--rose); }
+
+    /* ── Section A: Apology Letter ── */
+    #sec-letter {
+      background: radial-gradient(ellipse at 40% 30%, #3d1a2e 0%, transparent 70%),
+                  radial-gradient(ellipse at 70% 70%, #1a1030 0%, transparent 70%);
+    }
+
+    .letter-wrapper {
+      max-width: 680px; width: 100%;
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(244,167,185,0.15);
+      border-radius: 20px;
+      padding: 3.5rem 3rem;
+      position: relative;
+      box-shadow: 0 0 60px rgba(180,80,120,0.12), 0 0 0 1px rgba(244,167,185,0.05);
+      animation: fadeUp 1s ease 0.4s both;
+    }
+    .letter-wrapper::before {
+      content: '❝';
+      position: absolute; top: 1.5rem; left: 2rem;
+      font-size: 4rem; color: rgba(244,167,185,0.12);
+      font-family: 'Playfair Display', serif;
+      line-height: 1;
+    }
+
+    .letter-tag {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1rem; color: var(--rose);
+      letter-spacing: 0.15em; margin-bottom: 1rem;
+      display: block;
+    }
+    .letter-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-style: italic;
+      background: linear-gradient(135deg, var(--blush), var(--rose), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2; margin-bottom: 2rem;
+    }
+
+    .letter-body p {
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      line-height: 1.9;
+      color: rgba(253,232,238,0.82);
+      margin-bottom: 1.4rem;
+      font-weight: 300;
+    }
+    .letter-body p em {
+      color: var(--rose); font-style: normal;
+    }
+    .letter-body .highlight {
+      display: block; margin: 1.5rem 0;
+      padding: 1rem 1.5rem;
+      border-left: 2px solid var(--rose);
+      background: rgba(244,167,185,0.05);
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      color: var(--blush);
+      font-size: 1.15rem;
+    }
+
+    .letter-sign {
+      margin-top: 2rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      color: var(--rose);
+      text-align: right;
+    }
+
+    /* ── Section B: Video ── */
+    #sec-video {
+      background: radial-gradient(ellipse at 60% 40%, #12082a 0%, transparent 70%),
+                  radial-gradient(ellipse at 20% 80%, #2a0f1f 0%, transparent 70%);
+      padding-top: 2rem; padding-bottom: 4rem;
+    }
+
+    .video-header { text-align: center; margin-bottom: 2.5rem; animation: fadeUp 1s ease 0.3s both; }
+    .video-header .tag {
+      font-family: 'Dancing Script', cursive; font-size: 1rem;
+      color: var(--lavender); letter-spacing: 0.15em;
+    }
+    .video-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-style: italic;
+      background: linear-gradient(135deg, var(--blush), var(--lavender));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 1.2;
+    }
+
+    .video-frame-outer {
+      position: relative; max-width: 720px; width: 100%;
+      animation: fadeUp 1s ease 0.6s both;
+    }
+    /* Decorative glow ring */
+    .video-frame-outer::before {
+      content: '';
+      position: absolute; inset: -3px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, var(--rose), var(--lavender), var(--gold), var(--rose));
+      background-size: 300% 300%;
+      animation: grad-shift 5s linear infinite;
+      z-index: -1;
+      filter: blur(8px); opacity: 0.6;
+    }
+    @keyframes grad-shift {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 300% 50%; }
+    }
+
+    .video-frame {
+      position: relative;
+      border-radius: 18px; overflow: hidden;
+      background: #000;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+      aspect-ratio: 16/9;
+    }
+    .video-frame iframe,
+    .video-frame video {
+      width: 100%; height: 100%;
+      border: none; display: block;
+    }
+
+    /* Video placeholder (shown until user replaces with real video) */
+    .video-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #1a0a18, #0d0810, #160c24);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem; padding: 2rem; text-align: center;
+    }
+    .placeholder-icon { font-size: 3rem; animation: heartbeat 1.8s ease-in-out infinite; }
+    @keyframes heartbeat {
+      0%,100% { transform: scale(1); } 14% { transform: scale(1.2); }
+      28% { transform: scale(1); } 42% { transform: scale(1.1); }
+    }
+    .placeholder-text {
+      font-family: 'Cormorant Garamond', serif;
+      color: rgba(253,232,238,0.6); font-style: italic; font-size: 1rem;
+      max-width: 320px; line-height: 1.7;
+    }
+    .placeholder-code {
+      background: rgba(244,167,185,0.08); border: 1px solid rgba(244,167,185,0.2);
+      border-radius: 8px; padding: 0.6rem 1rem;
+      font-size: 0.78rem; color: var(--rose);
+      font-family: 'Courier New', monospace; letter-spacing: 0.05em;
+    }
+
+    .video-caption {
+      text-align: center; margin-top: 1.2rem;
+      font-style: italic; color: rgba(253,232,238,0.5);
+      font-size: 0.95rem;
+      animation: fadeIn 1s ease 1s both;
+    }
+
+    /* ── Next page btn ── */
+    .next-btn-wrap {
+      text-align: center; margin-top: 3rem;
+      animation: fadeUp 1s ease 0.8s both;
+    }
+    .next-btn {
+      display: inline-block; padding: 1rem 2.8rem;
+      border: 1.5px solid var(--rose); border-radius: 50px;
+      color: var(--blush); font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; letter-spacing: 0.15em;
+      text-decoration: none; text-transform: uppercase;
+      cursor: none; position: relative; overflow: hidden;
+      transition: color 0.4s, border-color 0.4s;
+    }
+    .next-btn::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s ease; z-index: -1;
+    }
+    .next-btn:hover::before { transform: scaleX(1); }
+    .next-btn:hover { color: var(--dark); border-color: var(--deep-rose); }
+
+    /* ── Helpers ── */
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(28px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 600px) {
+      .letter-wrapper { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-trail" id="cursorTrail"></div>
+  <canvas id="starfield"></canvas>
+  <div class="petal-container" id="petalContainer"></div>
+
+  <a href="index.html" class="back-link">← back</a>
+
+  <div class="page-nav">
+    <div class="nav-dot"></div>
+    <div class="nav-dot active"></div>
+    <div class="nav-dot"></div>
+  </div>
+
+  <!-- ══════════ SECTION A: LETTER ══════════ -->
+  <section id="sec-letter" class="section">
+    <div class="letter-wrapper">
+      <span class="letter-tag">✦ from the bottom of my heart</span>
+      <h2 class="letter-heading">I owe you more<br>than words can hold</h2>
+
+      <div class="letter-body">
+        <p>
+          My Sabu, I've been sitting here trying to find the perfect words,
+          and I've come to realise there aren't any, because only thing perfect in my life , is you
+          <em>but I need you to know how truly sorry I am.</em>
+        </p>
+
+        <span class="highlight">
+          "You deserved someone who shows up for you every single time, listens first , reacts later, calm over all moods
+          and I let you down. That fault is entirely on me."
+        </span>
+
+        <p>
+          I wasn't thinking about how my actions would make you feel,
+          and the moment I did, it hit me all at once, the hurt I caused you.
+          <em>That's not okay.</em> You give so much love, so freely,
+          and you deserved so much better in that moment, in every moment , in your sad moments too! 
+          but i fuking get sad myself when you are sad without holding you up! i am so sorrrrry baby! 
+        </p>
+
+        <p>
+          I don't want you to just forgive me and move on —
+          I want to <em>be better</em>. I want to listen more,
+          to think before I act, and get back the wade/fox you ever wanted from me and to never take for granted
+          the beautiful, patient, wonderful person you are.
+        </p>
+
+        <p>
+          If you let me, I'll spend every day making it up to you —
+          not with grand gestures (though those too 🌹),
+          but in the quiet, consistent way that says:
+          <em>I see you. I choose you. In good times , in difficult times Always.</em>
+        </p>
+
+        <p style="font-style:italic; color: rgba(253,232,238,0.55); font-size:0.95rem;">
+          Sabu could not afford a billboard near your home , someday i will,  but today a virtual billboard from me:🌸
+        </p>
+      </div>
+
+      <div class="letter-sign"> তোমার অবাধ্য ex . কিন্তু বাধ্য বর্তমান Your sebab ♡</div>
+    </div>
+  </section>
+
+  <!-- ══════════ SECTION B: VIDEO ══════════ -->
+  <section id="sec-video" class="section">
+    <div class="video-header reveal">
+      <p class="tag">✦ To the biggest highlight of my life </p>
+      <h2>A virtual billboard <br>just for you</h2>
+    </div>
+
+    <div class="video-frame-outer reveal">
+      <div class="video-frame">
+
+        <!--
+          ╔══════════════════════════════════════════════════════════════╗
+          ║  👇 REPLACE THIS SECTION WITH YOUR VIDEO                    ║
+          ║                                                              ║
+          ║  OPTION 1 — YouTube embed:                                  ║
+          ║  <iframe                                                     ║
+          ║    src="https://www.youtube.com/embed/YOUR_VIDEO_ID"        ║
+          ║    allow="autoplay; encrypted-media" allowfullscreen>       ║
+          ║  </iframe>                                                   ║
+          ║                                                              ║
+          ║  OPTION 2 — Local video file:                               ║
+          ║  <video controls autoplay muted loop>                       ║
+          ║    <source src="your-video.mp4" type="video/mp4">          ║
+          ║  </video>                                                    ║
+          ╚══════════════════════════════════════════════════════════════╝
+        -->
+
+        <!-- ✦ PLACEHOLDER — delete this div when you add a real video ✦ -->
+        <div class="video-placeholder">
+          <div class="placeholder-icon">🎬</div>
+          <p class="placeholder-text">
+            Your special video goes here.<br>
+            Replace the placeholder with a YouTube embed or your own video file.
+          </p>
+          <div class="placeholder-code">
+            src="https://www.youtube.com/embed/VIDEO_ID"
+          </div>
+        </div>
+        <!-- ✦ end placeholder ✦ -->
+
+      </div>
+    </div>
+    <p class="video-caption reveal">
+    The last thing i ever want, is losing you... never ever again 🌸
+    </p>
+
+    <div class="next-btn-wrap reveal">
+      <a href="page3.html" class="next-btn">One last thing &rarr;</a>
+    </div>
+  </section>
+
+  <script>
+    // Cursor
+    const cursor = document.getElementById('cursor');
+    const trail  = document.getElementById('cursorTrail');
+    let mx=0, my=0;
+    document.addEventListener('mousemove', e => {
+      mx=e.clientX; my=e.clientY;
+      cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+      setTimeout(()=>{ trail.style.left=mx+'px'; trail.style.top=my+'px'; }, 80);
+    });
+
+    // Starfield
+    const canvas=document.getElementById('starfield'), ctx=canvas.getContext('2d');
+    let stars=[];
+    function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+    function initStars(){ stars=[]; for(let i=0;i<200;i++) stars.push({ x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*1.3+0.3, speed:Math.random()*0.005+0.002, phase:Math.random()*Math.PI*2 }); }
+    function drawStars(t){ ctx.clearRect(0,0,canvas.width,canvas.height); stars.forEach(s=>{ const a=0.3+0.7*Math.abs(Math.sin(s.phase+t*s.speed)); ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fillStyle=`rgba(253,232,238,${a})`; ctx.fill(); }); requestAnimationFrame(drawStars); }
+    resize(); initStars(); drawStars(0);
+    window.addEventListener('resize',()=>{ resize(); initStars(); });
+
+    // Petals
+    const pc=document.getElementById('petalContainer');
+    function spawnPetal(){ const p=document.createElement('div'); p.className='petal'; const sz=7+Math.random()*12; p.style.cssText=`left:${Math.random()*100}%;width:${sz}px;height:${sz}px;background:radial-gradient(circle at 30% 30%,#f9c8d8,#e07b95);animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*3}s;`; pc.appendChild(p); setTimeout(()=>p.remove(),20000); }
+    setInterval(spawnPetal,500); for(let i=0;i<6;i++) spawnPetal();
+
+    // Sparkle
+    document.addEventListener('click', e => {
+      for(let i=0;i<10;i++){
+        const s=document.createElement('div'), angle=(i/10)*Math.PI*2, dist=25+Math.random()*35;
+        s.style.cssText=`position:fixed;left:${e.clientX}px;top:${e.clientY}px;width:5px;height:5px;border-radius:50%;background:${['#f4a7b9','#d4af7a','#d4b8e0','#fff'][Math.floor(Math.random()*4)]};pointer-events:none;z-index:9999;transition:transform 0.6s ease,opacity 0.6s;transform:translate(-50%,-50%);`;
+        document.body.appendChild(s);
+        requestAnimationFrame(()=>{ s.style.transform=`translate(calc(-50% + ${Math.cos(angle)*dist}px),calc(-50% + ${Math.sin(angle)*dist}px))`; s.style.opacity='0'; });
+        setTimeout(()=>s.remove(),700);
+      }
+    });
+
+    // Scroll reveal
+    const reveals=document.querySelectorAll('.reveal');
+    const obs=new IntersectionObserver(entries=>entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }),{threshold:0.15});
+    reveals.forEach(r=>obs.observe(r));
+  </script>
+</body>
+</html>

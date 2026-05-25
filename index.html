@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I'm really sorry my sabu 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --rose: #f4a7b9;
+      --deep-rose: #e07b95;
+      --blush: #fde8ee;
+      --lavender: #d4b8e0;
+      --cream: #fff8f0;
+      --gold: #d4af7a;
+      --dark: #2a1a22;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── Custom Cursor ── */
+    .cursor {
+      position: fixed; width: 12px; height: 12px;
+      background: var(--rose); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, background 0.3s;
+      mix-blend-mode: screen;
+    }
+    .cursor-trail {
+      position: fixed; width: 30px; height: 30px;
+      border: 1px solid var(--rose); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: left 0.15s ease, top 0.15s ease, opacity 0.3s;
+      opacity: 0.5;
+    }
+
+    /* ── Canvas Stars ── */
+    #starfield {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0; pointer-events: none;
+    }
+
+    /* ── Floating Petals ── */
+    .petal-container {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 1; overflow: hidden;
+    }
+    .petal {
+      position: absolute; top: -40px;
+      width: 14px; height: 14px;
+      background: radial-gradient(circle at 30% 30%, #f9c8d8, #e07b95);
+      border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+      opacity: 0;
+      animation: falling linear infinite;
+    }
+    @keyframes falling {
+      0%   { opacity: 0; transform: translateY(-40px) rotate(0deg) scale(0.8); }
+      10%  { opacity: 0.8; }
+      90%  { opacity: 0.5; }
+      100% { opacity: 0; transform: translateY(110vh) rotate(720deg) translateX(60px) scale(1.1); }
+    }
+
+    /* ── Page 1 ── */
+    #page1 {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      z-index: 2; overflow: hidden;
+    }
+
+    .bg-gradient {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 20%, #3d1a2e 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 80%, #1a1030 0%, transparent 60%),
+                  radial-gradient(ellipse at 50% 50%, #2a1a22 0%, #0d0810 100%);
+      z-index: -1;
+    }
+
+    /* Glowing orbs */
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(60px); pointer-events: none;
+      animation: orb-drift ease-in-out infinite;
+    }
+    .orb1 { width: 400px; height: 400px; background: rgba(212,135,160,0.18); top: -100px; left: -100px; animation-duration: 12s; }
+    .orb2 { width: 300px; height: 300px; background: rgba(180,120,220,0.15); bottom: -80px; right: -80px; animation-duration: 9s; animation-delay: -3s; }
+    .orb3 { width: 200px; height: 200px; background: rgba(244,167,185,0.12); top: 40%; left: 60%; animation-duration: 15s; animation-delay: -7s; }
+    @keyframes orb-drift {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%       { transform: translate(30px, -40px) scale(1.08); }
+      66%       { transform: translate(-20px, 30px) scale(0.95); }
+    }
+
+    /* Center content */
+    .hero { text-align: center; position: relative; z-index: 3; padding: 2rem; }
+
+    .heart-icon {
+      font-size: 3rem; display: inline-block;
+      animation: heartbeat 1.8s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(244,167,185,0.8));
+      margin-bottom: 1.5rem;
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      14%       { transform: scale(1.25); }
+      28%       { transform: scale(1); }
+      42%       { transform: scale(1.15); }
+      56%       { transform: scale(1); }
+    }
+
+    .title-sub {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      color: var(--rose);
+      letter-spacing: 0.15em;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.3s forwards;
+      margin-bottom: 0.5rem;
+    }
+
+    .title-main {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1;
+      background: linear-gradient(135deg, #fde8ee 0%, #f4a7b9 40%, #d4af7a 70%, #fde8ee 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s linear infinite, fadeUp 1s ease 0.6s both;
+      margin-bottom: 1rem;
+    }
+    @keyframes shimmer {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .title-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      color: var(--lavender);
+      animation: fadeUp 1s ease 0.9s both;
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+    }
+
+    .divider {
+      width: 120px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--rose), transparent);
+      margin: 0 auto 2rem;
+      animation: fadeIn 1s ease 1.2s both;
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: rgba(253,232,238,0.75);
+      font-style: italic;
+      max-width: 480px;
+      line-height: 1.8;
+      animation: fadeUp 1s ease 1.4s both;
+      margin: 0 auto 2.5rem;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 1rem 2.8rem;
+      border: 1.5px solid var(--rose);
+      border-radius: 50px;
+      color: var(--blush);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      text-transform: uppercase;
+      cursor: none;
+      position: relative; overflow: hidden;
+      animation: fadeUp 1s ease 1.7s both;
+      transition: color 0.4s, border-color 0.4s;
+    }
+    .cta-btn::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s ease; z-index: -1;
+    }
+    .cta-btn:hover::before { transform: scaleX(1); }
+    .cta-btn:hover { color: var(--dark); border-color: var(--deep-rose); }
+
+    /* scroll cue */
+    .scroll-cue {
+      position: absolute; bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column;
+      align-items: center; gap: 6px;
+      animation: fadeIn 1s ease 2.5s both;
+      z-index: 3;
+    }
+    .scroll-cue span {
+      font-size: 0.7rem; color: rgba(244,167,185,0.6);
+      letter-spacing: 0.25em; text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px; height: 50px;
+      background: linear-gradient(180deg, var(--rose), transparent);
+      animation: scroll-pulse 2s ease-in-out infinite;
+    }
+    @keyframes scroll-pulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50%       { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* ── Floating message cards ── */
+    .float-cards {
+      position: absolute; inset: 0; pointer-events: none; z-index: 2;
+    }
+    .float-card {
+      position: absolute;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(244,167,185,0.2);
+      border-radius: 12px;
+      padding: 0.8rem 1.2rem;
+      font-size: 0.85rem;
+      color: rgba(253,232,238,0.6);
+      font-style: italic;
+      animation: float-card-anim ease-in-out infinite;
+    }
+    .float-card:nth-child(1) { top: 15%; left: 8%; animation-duration: 7s; animation-delay: 0s; }
+    .float-card:nth-child(2) { top: 25%; right: 6%; animation-duration: 9s; animation-delay: -3s; }
+    .float-card:nth-child(3) { bottom: 25%; left: 5%; animation-duration: 8s; animation-delay: -5s; }
+    .float-card:nth-child(4) { bottom: 20%; right: 8%; animation-duration: 6s; animation-delay: -2s; }
+    @keyframes float-card-anim {
+      0%, 100% { transform: translateY(0) rotate(-1deg); }
+      50%       { transform: translateY(-14px) rotate(1deg); }
+    }
+    @media (max-width: 600px) { .float-card { display: none; } }
+
+    /* ── Keyframes helpers ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-trail" id="cursorTrail"></div>
+
+  <canvas id="starfield"></canvas>
+
+  <div class="petal-container" id="petalContainer"></div>
+
+  <!-- ══════════════ PAGE 1 ══════════════ -->
+  <section id="page1">
+    <div class="bg-gradient"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+
+    <!-- Floating whisper cards -->
+    <div class="float-cards">
+      <div class="float-card">"তুমি আমার সব স্বপ্ন"</div>
+      <div class="float-card">"I was so wrong, and I know it"</div>
+      <div class="float-card">"তুমি ছাড়া আমি অসহায়"</div>
+      <div class="float-card">"My heart only beats for you"</div>
+    </div>
+
+    <div class="hero">
+      <div class="heart-icon">🌸</div>
+      <p class="title-sub">a letter from my heart</p>
+      <h1 class="title-main">I'm Sorry</h1>
+      <p class="title-name">for you, my sabu ♡</p>
+      <div class="divider"></div>
+      <p class="subtitle">
+        থাকিতেই করিতে হয় যত্ন , তবেই হয়না তা বৃথা,<br>
+        চলে গেলে বুঝা যায় হারানোর ব্যাথা 
+      </p>
+      <a href="page2.html" class="cta-btn"> Read this letter ( Click here) &rarr;</a>
+    </div>
+
+    <div class="scroll-cue">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <script>
+    // ── Cursor ──
+    const cursor = document.getElementById('cursor');
+    const trail  = document.getElementById('cursorTrail');
+    let mx = 0, my = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top  = my + 'px';
+      setTimeout(() => {
+        trail.style.left = mx + 'px';
+        trail.style.top  = my + 'px';
+      }, 80);
+    });
+
+    // ── Starfield ──
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    function resize() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < 220; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.4 + 0.3,
+          a: Math.random(),
+          speed: Math.random() * 0.006 + 0.002,
+          phase: Math.random() * Math.PI * 2
+        });
+      }
+    }
+    function drawStars(t) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => {
+        const alpha = 0.3 + 0.7 * Math.abs(Math.sin(s.phase + t * s.speed));
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(253,232,238,${alpha})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(drawStars);
+    }
+    resize(); initStars(); drawStars(0);
+    window.addEventListener('resize', () => { resize(); initStars(); });
+
+    // ── Petals ──
+    const petalContainer = document.getElementById('petalContainer');
+    function spawnPetal() {
+      const p = document.createElement('div');
+      p.className = 'petal';
+      const size = 8 + Math.random() * 14;
+      p.style.cssText = `
+        left: ${Math.random() * 100}%;
+        width: ${size}px; height: ${size}px;
+        animation-duration: ${6 + Math.random() * 10}s;
+        animation-delay: ${Math.random() * 3}s;
+        opacity: 0;
+        filter: hue-rotate(${Math.random() * 40 - 20}deg);
+      `;
+      petalContainer.appendChild(p);
+      setTimeout(() => p.remove(), 20000);
+    }
+    setInterval(spawnPetal, 400);
+    for (let i = 0; i < 8; i++) spawnPetal();
+
+    // ── Sparkle on click ──
+    document.addEventListener('click', e => {
+      for (let i = 0; i < 12; i++) {
+        const s = document.createElement('div');
+        const angle = (i / 12) * Math.PI * 2;
+        const dist  = 30 + Math.random() * 40;
+        s.style.cssText = `
+          position:fixed; left:${e.clientX}px; top:${e.clientY}px;
+          width:5px; height:5px; border-radius:50%;
+          background:${['#f4a7b9','#d4af7a','#d4b8e0','#fff'][Math.floor(Math.random()*4)]};
+          pointer-events:none; z-index:9999;
+          transition: transform 0.6s ease, opacity 0.6s ease;
+          transform: translate(-50%,-50%);
+        `;
+        document.body.appendChild(s);
+        requestAnimationFrame(() => {
+          s.style.transform = `translate(calc(-50% + ${Math.cos(angle)*dist}px), calc(-50% + ${Math.sin(angle)*dist}px))`;
+          s.style.opacity = '0';
+        });
+        setTimeout(() => s.remove(), 700);
+      }
+    });
+  </script>
+</body>
+</html>
