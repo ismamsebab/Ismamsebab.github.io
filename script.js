@@ -4,6 +4,35 @@ enterButton.addEventListener("click", startHeartScene);
 
 
 /* =========================================
+   IMAGE HELPERS
+========================================= */
+
+function setCharacterMood(opacity, brightness, saturation) {
+
+    const cecilion = document.querySelector(".cecilion");
+    const carmilla = document.querySelector(".carmilla");
+
+    if (cecilion) {
+
+        cecilion.style.opacity = opacity;
+
+        cecilion.style.filter =
+            `brightness(${brightness}) saturate(${saturation})`;
+
+    }
+
+    if (carmilla) {
+
+        carmilla.style.opacity = opacity;
+
+        carmilla.style.filter =
+            `brightness(${brightness}) saturate(${saturation})`;
+
+    }
+}
+
+
+/* =========================================
    SCENE 1 → SCENE 2
 ========================================= */
 
@@ -152,27 +181,41 @@ function showMistake(index) {
 
     const mistake = mistakes[index];
 
+
     /*
-        Make the characters fade darker as
-        the heart gets damaged.
+        The characters become darker
+        as the heart takes damage.
     */
 
-    const damageLevels = {
-        0: 0.34,
-        1: 0.25,
-        2: 0.14
-    };
+    if (index === 0) {
 
-    const opacity = damageLevels[index] || 0.10;
+        setCharacterMood(
+            "0.34",
+            "0.48",
+            "0.75"
+        );
 
-    cecilionImage.style.opacity = opacity;
-    carmillaImage.style.opacity = opacity;
+    }
 
-    cecilionImage.style.filter =
-        `brightness(${0.48 - index * 0.08}) saturate(${0.75 - index * 0.12})`;
+    else if (index === 1) {
 
-    carmillaImage.style.filter =
-        `brightness(${0.48 - index * 0.08}) saturate(${0.75 - index * 0.12})`;
+        setCharacterMood(
+            "0.25",
+            "0.40",
+            "0.63"
+        );
+
+    }
+
+    else if (index === 2) {
+
+        setCharacterMood(
+            "0.14",
+            "0.32",
+            "0.50"
+        );
+
+    }
 
 
     intro.innerHTML = `
@@ -227,9 +270,11 @@ function showMistake(index) {
         .addEventListener("click", acceptMistake);
 }
 
+
 /* =========================================
    ACCEPT MISTAKE
 ========================================= */
+
 function acceptMistake() {
 
     const intro = document.querySelector(".intro");
@@ -244,7 +289,9 @@ function acceptMistake() {
 
             showMistake(currentMistake);
 
-        } else {
+        }
+
+        else {
 
             showBrokenHeart();
 
@@ -256,32 +303,25 @@ function acceptMistake() {
 }
 
 
-     
-
 /* =========================================
    BROKEN HEART
 ========================================= */
-
 
 function showBrokenHeart() {
 
     const intro = document.querySelector(".intro");
 
-    // Darken the character images
-    const cecilion = document.querySelector(".cecilion");
-    const carmilla = document.querySelector(".carmilla");
 
-    if (cecilion) {
-        cecilion.style.opacity = "0.03";
-        cecilion.style.filter =
-            "brightness(0.18) grayscale(1)";
-    }
+    /*
+        Everything becomes almost completely dark.
+    */
 
-    if (carmilla) {
-        carmilla.style.opacity = "0.03";
-        carmilla.style.filter =
-            "brightness(0.18) grayscale(1)";
-    }
+    setCharacterMood(
+        "0.03",
+        "0.18",
+        "0.0"
+    );
+
 
     intro.innerHTML = `
 
@@ -324,12 +364,74 @@ function showBrokenHeart() {
 
     `;
 
+
     document
         .getElementById("realizationButton")
         .addEventListener("click", showRealization);
 }
 
-   
+
+/* =========================================
+   REALIZATION
+========================================= */
+
+function showRealization() {
+
+    const intro = document.querySelector(".intro");
+
+    fadeOut(intro);
+
+    setTimeout(() => {
+
+        intro.innerHTML = `
+
+            <div class="realization-scene">
+
+                <div class="symbol">
+                    ♡
+                </div>
+
+                <p class="small-text">
+                    I finally realized...
+                </p>
+
+                <h2>
+                    Those weren't points.
+                </h2>
+
+                <p>
+                    They were cracks in your heart.
+                </p>
+
+                <p>
+                    And I was the one who caused them.
+                </p>
+
+                <button id="continueButton">
+
+                    Continue
+
+                    <span>♡</span>
+
+                </button>
+
+            </div>
+
+        `;
+
+        fadeIn(intro);
+
+        document
+            .getElementById("continueButton")
+            .addEventListener(
+                "click",
+                showBasantiScene
+            );
+
+    }, 1000);
+}
+
+
 /* =========================================
    BASANTI SCENE
 ========================================= */
@@ -388,7 +490,10 @@ function showBasantiScene() {
 
         document
             .getElementById("warmButton")
-            .addEventListener("click", startWarmScene);
+            .addEventListener(
+                "click",
+                startWarmScene
+            );
 
     }, 900);
 }
@@ -398,26 +503,37 @@ function showBasantiScene() {
    WARM TRANSITION
 ========================================= */
 
-
 function startWarmScene() {
 
     document.body.classList.add("warm-mode");
 
+
     /*
-        The separate characters disappear
-        and the couple image begins appearing.
+        Individual characters fade out.
+        Together image comes forward.
     */
 
-    cecilionImage.style.opacity = "0.08";
-    carmillaImage.style.opacity = "0.08";
+    setCharacterMood(
+        "0.08",
+        "0.35",
+        "0.50"
+    );
 
-    cecilionImage.style.filter =
-        "brightness(0.35) saturate(0.5)";
 
-    carmillaImage.style.filter =
-        "brightness(0.35) saturate(0.5)";
+    const together =
+        document.querySelector(".together");
 
-    document.querySelector(".together").style.opacity = "0.28";
+    if (together) {
+
+        together.style.opacity = "0.28";
+
+        together.style.filter =
+            "brightness(0.65) saturate(1.05)";
+
+        together.style.transform =
+            "scale(1)";
+
+    }
 
 
     const intro = document.querySelector(".intro");
@@ -466,7 +582,10 @@ function startWarmScene() {
 
         document
             .getElementById("repairButton")
-            .addEventListener("click", startRepair);
+            .addEventListener(
+                "click",
+                startRepair
+            );
 
     }, 900);
 }
@@ -513,7 +632,10 @@ function startRepair() {
 
         document
             .getElementById("repairHeart")
-            .addEventListener("click", repairHeart);
+            .addEventListener(
+                "click",
+                repairHeart
+            );
 
     }, 700);
 }
@@ -522,11 +644,17 @@ function startRepair() {
 let repairCount = 0;
 
 
+/* =========================================
+   REPAIR HEART
+========================================= */
+
 function repairHeart() {
 
-    const heart = document.getElementById("repairHeart");
+    const heart =
+        document.getElementById("repairHeart");
 
-    const text = document.getElementById("repairText");
+    const text =
+        document.getElementById("repairText");
 
     repairCount++;
 
@@ -534,7 +662,9 @@ function repairHeart() {
 
     setTimeout(() => {
 
-        heart.classList.remove("repair-pulse");
+        heart.classList.remove(
+            "repair-pulse"
+        );
 
     }, 300);
 
@@ -544,7 +674,9 @@ function repairHeart() {
         text.innerHTML =
             "One mistake doesn't define everything.";
 
-        heart.classList.remove("broken-repair");
+        heart.classList.remove(
+            "broken-repair"
+        );
 
     }
 
@@ -571,7 +703,9 @@ function repairHeart() {
 
     else if (repairCount >= 5) {
 
-        heart.classList.add("fully-repaired");
+        heart.classList.add(
+            "fully-repaired"
+        );
 
         text.innerHTML =
             "♡ Thank you for hearing me. ♡";
