@@ -667,3 +667,582 @@ button:active {
             translateY(-10vh);
     }
 }
+
+
+/* =========================================
+   DAMAGE HEART
+========================================= */
+
+.damage-heart {
+
+    position: relative;
+
+    width: 105px;
+    height: 105px;
+
+    margin: 10px auto 10px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    transition:
+        transform 0.4s ease,
+        filter 0.4s ease;
+}
+
+
+.heart-symbol {
+
+    font-size: 85px;
+
+    color: #d94378;
+
+    line-height: 1;
+
+    text-shadow:
+        0 0 15px rgba(255, 50, 120, 0.6),
+        0 0 35px rgba(255, 50, 120, 0.25);
+}
+
+
+/* Small crack */
+
+.crack-1::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 3px;
+    height: 55px;
+
+    background: #210914;
+
+    transform:
+        rotate(22deg);
+
+    top: 20px;
+    left: 53px;
+
+    box-shadow:
+        4px 18px 0 #210914;
+}
+
+
+/* Medium cracks */
+
+.crack-2::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 4px;
+    height: 70px;
+
+    background: #210914;
+
+    transform:
+        rotate(25deg);
+
+    top: 15px;
+    left: 51px;
+
+    box-shadow:
+        -15px 25px 0 -1px #210914,
+        12px 38px 0 -1px #210914;
+}
+
+
+.crack-2 {
+
+    filter:
+        drop-shadow(
+            0 0 12px
+            rgba(255, 40, 100, 0.25)
+        );
+}
+
+
+/* Heavy cracks */
+
+.crack-3::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 5px;
+    height: 82px;
+
+    background: #16060c;
+
+    transform:
+        rotate(24deg);
+
+    top: 10px;
+    left: 50px;
+
+    box-shadow:
+        -17px 24px 0 -1px #16060c,
+        15px 35px 0 -1px #16060c,
+        -10px 57px 0 -1px #16060c;
+}
+
+
+.crack-3 {
+
+    transform:
+        scale(0.95);
+
+    filter:
+        drop-shadow(
+            0 0 18px
+            rgba(255, 30, 90, 0.3)
+        );
+}
+
+
+/* =========================================
+   BROKEN HEART
+========================================= */
+
+.broken-heart-large {
+
+    position: relative;
+
+    width: 130px;
+    height: 130px;
+
+    margin:
+        0 auto 5px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+
+.broken-heart-large span {
+
+    font-size: 105px;
+
+    color: #74233f;
+
+    text-shadow:
+        0 0 15px
+        rgba(255, 40, 100, 0.3);
+
+    animation:
+        brokenPulse 3s ease-in-out infinite;
+}
+
+
+.broken-heart-large i {
+
+    position: absolute;
+
+    width: 5px;
+    height: 100px;
+
+    background: #090308;
+
+    transform:
+        rotate(24deg);
+
+    left: 63px;
+
+    top: 12px;
+}
+
+
+.broken-heart-large b {
+
+    position: absolute;
+
+    width: 45px;
+    height: 5px;
+
+    background: #090308;
+
+    transform:
+        rotate(-25deg);
+
+    left: 35px;
+    top: 65px;
+}
+
+
+/* =========================================
+   BASANTI SCENE
+========================================= */
+
+.basanti-scene {
+
+    animation:
+        heartSceneAppear 1s ease;
+}
+
+
+.cartoon-couple {
+
+    position: relative;
+
+    width: 150px;
+    height: 130px;
+
+    margin:
+        0 auto 20px;
+}
+
+
+.cartoon-heart {
+
+    position: absolute;
+
+    font-size: 95px;
+
+    color: #e95a91;
+
+    left: 20px;
+
+    top: 10px;
+
+    animation:
+        heartbeat 1.5s ease-in-out infinite;
+}
+
+
+.cartoon-face {
+
+    position: absolute;
+
+    font-size: 48px;
+
+    right: 15px;
+
+    bottom: 10px;
+
+    animation:
+        floatFace 2s ease-in-out infinite;
+}
+
+
+.basanti-text {
+
+    font-size: 22px;
+
+    font-style: italic;
+
+    color: #f4a5c5;
+
+    margin:
+        20px 0 10px;
+
+    animation:
+        textGlow 2s ease-in-out infinite;
+}
+
+
+.music-note {
+
+    font-size: 22px;
+
+    letter-spacing: 10px;
+
+    color:
+        rgba(255, 180, 210, 0.5);
+
+    margin-bottom: 30px;
+
+    animation:
+        floatNotes 2s ease-in-out infinite;
+}
+
+
+/* =========================================
+   WARM MODE
+========================================= */
+
+body.warm-mode {
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            #57243d 0%,
+            #291323 40%,
+            #0e0810 100%
+        );
+
+    transition:
+        background 2s ease;
+}
+
+
+.warm-scene {
+
+    animation:
+        warmAppear 1.2s ease;
+}
+
+
+.warm-heart {
+
+    color: #ff8ab5;
+
+    text-shadow:
+        0 0 20px
+        rgba(255, 100, 170, 0.7),
+        0 0 60px
+        rgba(255, 50, 140, 0.35);
+}
+
+
+.warm-scene p {
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+    color:
+        rgba(255, 235, 245, 0.75);
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================================
+   REPAIR
+========================================= */
+
+.repair-scene {
+
+    animation:
+        warmAppear 1s ease;
+}
+
+
+.repair-heart {
+
+    width: 150px;
+    height: 150px;
+
+    margin:
+        30px auto;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 125px;
+
+    color: #b84770;
+
+    cursor: pointer;
+
+    text-shadow:
+        0 0 15px
+        rgba(255, 70, 130, 0.45);
+
+    transition:
+        color 0.8s ease,
+        filter 0.8s ease,
+        transform 0.3s ease;
+}
+
+
+.broken-repair {
+
+    filter:
+        grayscale(0.4);
+
+    opacity:
+        0.65;
+}
+
+
+.repair-heart:hover {
+
+    transform:
+        scale(1.05);
+}
+
+
+.repair-pulse {
+
+    animation:
+        repairPulse 0.3s ease;
+}
+
+
+.fully-repaired {
+
+    color: #ff8db7;
+
+    opacity: 1;
+
+    filter:
+        drop-shadow(
+            0 0 25px
+            rgba(255, 80, 150, 0.8)
+        );
+
+    animation:
+        heartbeat 1.5s ease-in-out infinite;
+}
+
+
+#repairText {
+
+    font-size: 15px;
+
+    color:
+        rgba(255, 235, 245, 0.75);
+
+    min-height: 30px;
+}
+
+
+/* =========================================
+   APOLOGY
+========================================= */
+
+.apology-scene {
+
+    animation:
+        warmAppear 1.2s ease;
+}
+
+
+.apology-scene h2 {
+
+    color: #ffb0cc;
+
+    text-shadow:
+        0 0 20px
+        rgba(255, 80, 140, 0.25);
+}
+
+
+.apology-scene p {
+
+    font-size: 16px;
+
+    line-height: 1.9;
+
+    color:
+        rgba(255, 240, 247, 0.78);
+
+    margin-bottom: 14px;
+}
+
+
+/* =========================================
+   EXTRA ANIMATIONS
+========================================= */
+
+@keyframes brokenPulse {
+
+    0%,
+    100% {
+        transform:
+            scale(1);
+    }
+
+    50% {
+        transform:
+            scale(0.96);
+    }
+}
+
+
+@keyframes floatFace {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-8px);
+    }
+}
+
+
+@keyframes textGlow {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 0 transparent;
+    }
+
+    50% {
+        text-shadow:
+            0 0 15px
+            rgba(255, 100, 170, 0.45);
+    }
+}
+
+
+@keyframes floatNotes {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-5px);
+    }
+}
+
+
+@keyframes warmAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(0.95);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+}
+
+
+@keyframes repairPulse {
+
+    0% {
+
+        transform:
+            scale(1);
+    }
+
+    50% {
+
+        transform:
+            scale(1.2);
+    }
+
+    100% {
+
+        transform:
+            scale(1);
+    }
+}
