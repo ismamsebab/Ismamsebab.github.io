@@ -1,4 +1,6 @@
 const enterButton = document.getElementById("enterButton");
+const cecilionImage = document.querySelector(".cecilion");
+const carmillaImage = document.querySelector(".carmilla");
 
 enterButton.addEventListener("click", startHeartScene);
 
@@ -152,6 +154,29 @@ function showMistake(index) {
 
     const mistake = mistakes[index];
 
+    /*
+        Make the characters fade darker as
+        the heart gets damaged.
+    */
+
+    const damageLevels = {
+        0: 0.34,
+        1: 0.25,
+        2: 0.14
+    };
+
+    const opacity = damageLevels[index] || 0.10;
+
+    cecilionImage.style.opacity = opacity;
+    carmillaImage.style.opacity = opacity;
+
+    cecilionImage.style.filter =
+        `brightness(${0.48 - index * 0.08}) saturate(${0.75 - index * 0.12})`;
+
+    carmillaImage.style.filter =
+        `brightness(${0.48 - index * 0.08}) saturate(${0.75 - index * 0.12})`;
+
+
     intro.innerHTML = `
 
         <div class="mistake-scene">
@@ -204,7 +229,6 @@ function showMistake(index) {
         .addEventListener("click", acceptMistake);
 }
 
-
 /* =========================================
    ACCEPT MISTAKE
 ========================================= */
@@ -242,6 +266,20 @@ function acceptMistake() {
 function showBrokenHeart() {
 
     const intro = document.querySelector(".intro");
+
+    /*
+        Everything disappears when the heart reaches zero.
+    */
+
+    cecilionImage.style.opacity = "0.03";
+    carmillaImage.style.opacity = "0.03";
+
+    cecilionImage.style.filter =
+        "brightness(0.18) grayscale(1)";
+
+    carmillaImage.style.filter =
+        "brightness(0.18) grayscale(1)";
+
 
     intro.innerHTML = `
 
@@ -287,64 +325,6 @@ function showBrokenHeart() {
     document
         .getElementById("realizationButton")
         .addEventListener("click", showRealization);
-}
-
-
-/* =========================================
-   REALIZATION
-========================================= */
-
-function showRealization() {
-
-    const intro = document.querySelector(".intro");
-
-    fadeOut(intro);
-
-    setTimeout(() => {
-
-        intro.innerHTML = `
-
-            <div class="realization-scene">
-
-                <div class="symbol">
-                    ♡
-                </div>
-
-                <p class="small-text">
-                    I finally realized...
-                </p>
-
-                <h2>
-                    Those weren't points.
-                </h2>
-
-                <p>
-                    They were cracks in your heart.
-                </p>
-
-                <p>
-                    And I was the one who caused them.
-                </p>
-
-                <button id="continueButton">
-
-                    Continue
-
-                    <span>♡</span>
-
-                </button>
-
-            </div>
-
-        `;
-
-        fadeIn(intro);
-
-        document
-            .getElementById("continueButton")
-            .addEventListener("click", showBasantiScene);
-
-    }, 1000);
 }
 
 
@@ -416,9 +396,27 @@ function showBasantiScene() {
    WARM TRANSITION
 ========================================= */
 
+
 function startWarmScene() {
 
     document.body.classList.add("warm-mode");
+
+    /*
+        The separate characters disappear
+        and the couple image begins appearing.
+    */
+
+    cecilionImage.style.opacity = "0.08";
+    carmillaImage.style.opacity = "0.08";
+
+    cecilionImage.style.filter =
+        "brightness(0.35) saturate(0.5)";
+
+    carmillaImage.style.filter =
+        "brightness(0.35) saturate(0.5)";
+
+    document.querySelector(".together").style.opacity = "0.28";
+
 
     const intro = document.querySelector(".intro");
 
