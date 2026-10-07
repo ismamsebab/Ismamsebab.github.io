@@ -1,0 +1,1297 @@
+/* =========================================
+   FOR SABU ❤️
+   Carmilla × Cecilion
+========================================= */
+
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    overflow-x: hidden;
+    background: #08070c;
+    color: #f4edf2;
+    font-family: Georgia, "Times New Roman", serif;
+    transition:
+        background 1.5s ease,
+        color 1.5s ease;
+}
+
+
+/* =========================================
+   CHARACTER BACKGROUND
+========================================= */
+
+.character-background {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.character {
+    position: absolute;
+    pointer-events: none;
+    object-fit: contain;
+
+    transition:
+        opacity 1.5s ease,
+        filter 1.5s ease,
+        transform 1.5s ease;
+}
+
+
+/* Cecilion */
+
+.character.cecilion {
+    width: min(72vw, 520px);
+    height: min(82vh, 700px);
+
+    left: -8%;
+    bottom: -4%;
+
+    opacity: 0.34;
+
+    filter:
+        brightness(0.48)
+        saturate(0.75);
+
+    transform: translateY(0);
+}
+
+
+/* Carmilla */
+
+.character.carmilla {
+    width: min(70vw, 510px);
+    height: min(88vh, 750px);
+
+    right: -8%;
+    bottom: -5%;
+
+    opacity: 0.34;
+
+    filter:
+        brightness(0.48)
+        saturate(0.75);
+
+    transform: translateY(0);
+}
+
+
+/* Carmilla + Cecilion together */
+
+.character.together {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0;
+    visibility: hidden;
+
+    filter:
+        brightness(0.65)
+        saturate(0.9);
+
+    transform: scale(1.04);
+
+    transition:
+        opacity 1.8s ease,
+        filter 1.8s ease,
+        transform 1.8s ease,
+        visibility 1.8s ease;
+}
+
+
+/* =========================================
+   ATMOSPHERIC OVERLAY
+========================================= */
+
+.background-overlay {
+    position: fixed;
+    inset: 0;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(50, 20, 45, 0.18),
+            rgba(5, 4, 9, 0.86)
+        );
+
+    transition:
+        background 1.5s ease;
+}
+
+
+/* =========================================
+   WARM MODE
+========================================= */
+
+body.warm-mode {
+    background:
+        #170b13;
+}
+
+
+/* Fade original characters into background */
+
+body.warm-mode .cecilion,
+body.warm-mode .carmilla {
+    opacity: 0.08;
+
+    filter:
+        brightness(0.35)
+        saturate(0.5);
+}
+
+
+/* Reveal together image */
+
+body.warm-mode .together {
+    opacity: 0.28;
+    visibility: visible;
+
+    filter:
+        brightness(0.55)
+        saturate(1.05);
+
+    transform: scale(1);
+}
+
+
+/* Warmer overlay */
+
+body.warm-mode .background-overlay {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(40, 8, 30, 0.52),
+            rgba(15, 5, 13, 0.58)
+        );
+}
+
+
+/* =========================================
+   PARTICLES
+========================================= */
+
+.particles {
+    position: fixed;
+    inset: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    opacity: 0.45;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.45) 1px,
+            transparent 1px
+        );
+
+    background-size: 80px 80px;
+
+    animation:
+        particleFloat 18s linear infinite;
+}
+
+@keyframes particleFloat {
+
+    from {
+        background-position:
+            0 0;
+    }
+
+    to {
+        background-position:
+            80px 160px;
+    }
+}
+
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.opening {
+    position: relative;
+
+    z-index: 3;
+
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px 20px;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   MOON
+========================================= */
+
+.moon {
+    position: fixed;
+
+    top: 8%;
+    left: 50%;
+
+    width: 150px;
+    height: 150px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff9fc,
+            #cdbcc8 42%,
+            #756474 72%,
+            transparent 73%
+        );
+
+    opacity: 0.12;
+
+    filter: blur(1px);
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   INTRO
+========================================= */
+
+.intro {
+    width: min(92vw, 540px);
+
+    margin: auto;
+
+    position: relative;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.intro h1 {
+    margin: 8px 0 12px;
+
+    font-size:
+        clamp(3.5rem, 14vw, 6rem);
+
+    font-weight: 400;
+
+    letter-spacing: 0.04em;
+
+    color: #f5dce9;
+
+    text-shadow:
+        0 0 20px rgba(255, 150, 205, 0.35);
+}
+
+.intro h2 {
+    margin: 12px 0 18px;
+
+    font-size:
+        clamp(1.8rem, 7vw, 2.8rem);
+
+    font-weight: 400;
+
+    color: #f4dce8;
+}
+
+.small-text {
+    font-size: 0.78rem;
+
+    letter-spacing: 0.28em;
+
+    text-transform: uppercase;
+
+    opacity: 0.62;
+}
+
+.subtitle {
+    margin: 20px auto 30px;
+
+    max-width: 360px;
+
+    line-height: 1.8;
+
+    font-size: 1rem;
+
+    opacity: 0.78;
+}
+
+
+/* =========================================
+   SYMBOLS
+========================================= */
+
+.symbol {
+    font-size: 3rem;
+
+    color: #e9b6d0;
+
+    text-shadow:
+        0 0 20px rgba(255, 100, 180, 0.45);
+
+    animation:
+        gentlePulse 3s ease-in-out infinite;
+}
+
+@keyframes gentlePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+button {
+    border: 1px solid rgba(245, 190, 220, 0.35);
+
+    border-radius: 999px;
+
+    padding: 13px 25px;
+
+    background:
+        rgba(255, 255, 255, 0.045);
+
+    color: #f7eaf1;
+
+    font-family: inherit;
+
+    font-size: 0.95rem;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(8px);
+
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+button span {
+    margin-left: 5px;
+}
+
+button:hover {
+    background:
+        rgba(255, 150, 200, 0.12);
+
+    border-color:
+        rgba(255, 190, 220, 0.65);
+
+    box-shadow:
+        0 0 20px rgba(255, 100, 180, 0.16);
+
+    transform:
+        translateY(-2px);
+}
+
+button:active {
+    transform:
+        scale(0.96);
+}
+
+
+/* =========================================
+   HEART SCENE
+========================================= */
+
+.heart-scene {
+    text-align: center;
+}
+
+.heart-container {
+    position: relative;
+
+    width: 150px;
+    height: 150px;
+
+    margin: 25px auto 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heart {
+    position: relative;
+
+    font-size: 6rem;
+
+    color: #b94b78;
+
+    line-height: 1;
+
+    text-shadow:
+        0 0 25px rgba(220, 50, 110, 0.5);
+
+    animation:
+        heartBeat 2s ease-in-out infinite;
+}
+
+.heart-glow {
+    position: absolute;
+
+    width: 110px;
+    height: 110px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(220, 60, 120, 0.16);
+
+    filter: blur(25px);
+
+    animation:
+        glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        transform: scale(0.85);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: 1;
+    }
+}
+
+.heart-number {
+    font-size: 1.3rem;
+
+    letter-spacing: 0.15em;
+
+    color: #e9a9c4;
+}
+
+.heart-description {
+    margin: 18px auto 25px;
+
+    max-width: 360px;
+
+    line-height: 1.7;
+
+    opacity: 0.72;
+}
+
+
+/* =========================================
+   MISTAKES
+========================================= */
+
+.mistake-scene {
+    text-align: center;
+
+    width: min(90vw, 480px);
+}
+
+.mistake-number {
+    font-size: 0.8rem;
+
+    letter-spacing: 0.3em;
+
+    opacity: 0.45;
+
+    margin-bottom: 5px;
+}
+
+.mistake-scene h2 {
+    margin-bottom: 15px;
+}
+
+.damage-heart {
+    position: relative;
+
+    width: 130px;
+    height: 120px;
+
+    margin: 10px auto 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heart-symbol {
+    font-size: 5.5rem;
+
+    line-height: 1;
+
+    color: #963e65;
+
+    text-shadow:
+        0 0 20px rgba(200, 50, 110, 0.4);
+}
+
+.crack-line {
+    position: absolute;
+
+    width: 4px;
+    height: 75px;
+
+    background:
+        rgba(20, 10, 18, 0.9);
+
+    transform:
+        rotate(22deg);
+
+    box-shadow:
+        0 0 5px rgba(0, 0, 0, 0.7);
+}
+
+.crack-1 .crack-line {
+    height: 45px;
+}
+
+.crack-2 .crack-line {
+    height: 65px;
+
+    transform:
+        rotate(-18deg);
+}
+
+.crack-3 .crack-line {
+    height: 85px;
+
+    transform:
+        rotate(28deg);
+}
+
+.heart-status {
+    margin: 5px 0 20px;
+
+    font-size: 1rem;
+
+    color: #d894b2;
+
+    letter-spacing: 0.08em;
+}
+
+.mistake-text {
+    margin: 10px auto;
+
+    max-width: 400px;
+
+    font-size: 1.05rem;
+
+    line-height: 1.7;
+}
+
+.realization {
+    margin: 12px auto 25px;
+
+    max-width: 390px;
+
+    line-height: 1.7;
+
+    opacity: 0.62;
+}
+
+
+/* Mistake transition */
+
+.mistake-fade {
+    opacity: 0;
+
+    transform:
+        translateY(-15px);
+}
+
+
+/* =========================================
+   BROKEN HEART
+========================================= */
+
+.broken-scene {
+    text-align: center;
+}
+
+.broken-heart-large {
+    position: relative;
+
+    width: 160px;
+    height: 140px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.broken-heart-large span {
+    font-size: 7rem;
+
+    line-height: 1;
+
+    color: #57263f;
+
+    filter:
+        grayscale(0.5);
+
+    text-shadow:
+        0 0 15px rgba(130, 40, 80, 0.25);
+}
+
+.broken-heart-large i,
+.broken-heart-large b {
+    position: absolute;
+
+    display: block;
+
+    width: 5px;
+
+    background:
+        #120b11;
+
+    transform-origin: center;
+
+    box-shadow:
+        0 0 5px rgba(0, 0, 0, 0.8);
+}
+
+.broken-heart-large i {
+    height: 90px;
+
+    transform:
+        rotate(25deg)
+        translateX(2px);
+}
+
+.broken-heart-large b {
+    height: 55px;
+
+    transform:
+        rotate(-22deg)
+        translate(15px, 20px);
+}
+
+.broken-status {
+    color: #8c536c;
+}
+
+.broken-scene h2 {
+    margin: 15px 0;
+}
+
+.broken-scene p {
+    margin: 8px auto;
+
+    max-width: 360px;
+
+    line-height: 1.7;
+
+    opacity: 0.68;
+}
+
+.broken-scene button {
+    margin-top: 20px;
+}
+
+
+/* =========================================
+   REALIZATION
+========================================= */
+
+.realization-scene {
+    text-align: center;
+}
+
+.realization-scene h2 {
+    margin-top: 18px;
+}
+
+.realization-scene p:not(.small-text) {
+    margin: 12px auto;
+
+    max-width: 370px;
+
+    line-height: 1.8;
+
+    opacity: 0.72;
+}
+
+.realization-scene button {
+    margin-top: 20px;
+}
+
+
+/* =========================================
+   BASANTI SCENE
+========================================= */
+
+.basanti-scene {
+    text-align: center;
+}
+
+.cartoon-couple {
+    position: relative;
+
+    width: 150px;
+    height: 110px;
+
+    margin: 0 auto 20px;
+}
+
+.cartoon-heart {
+    position: absolute;
+
+    left: 50%;
+    top: 0;
+
+    transform:
+        translateX(-50%);
+
+    font-size: 4rem;
+
+    color: #c85b88;
+
+    animation:
+        heartBeat 1.8s ease-in-out infinite;
+}
+
+.cartoon-face {
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+
+    transform:
+        translateX(-50%);
+
+    font-size: 2.7rem;
+}
+
+.basanti-text {
+    margin: 20px 0 10px;
+
+    font-size: 1.25rem;
+
+    font-style: italic;
+
+    color: #efbfd5;
+}
+
+.music-note {
+    margin: 15px 0 25px;
+
+    font-size: 1.3rem;
+
+    letter-spacing: 0.5em;
+
+    opacity: 0.6;
+
+    animation:
+        noteFloat 2s ease-in-out infinite;
+}
+
+@keyframes noteFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-7px);
+    }
+}
+
+
+/* =========================================
+   WARM SCENE
+========================================= */
+
+.warm-scene {
+    text-align: center;
+}
+
+.warm-heart {
+    color: #e47ca8;
+
+    text-shadow:
+        0 0 30px rgba(255, 100, 180, 0.55);
+}
+
+.warm-scene h2 {
+    color: #f2c6d9;
+}
+
+.warm-scene p:not(.small-text) {
+    margin: 12px auto;
+
+    max-width: 390px;
+
+    line-height: 1.8;
+
+    opacity: 0.76;
+}
+
+.warm-scene button {
+    margin-top: 20px;
+}
+
+
+/* =========================================
+   REPAIR SCENE
+========================================= */
+
+.repair-scene {
+    text-align: center;
+}
+
+.repair-heart {
+    width: 150px;
+    height: 150px;
+
+    margin: 25px auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 6rem;
+
+    color: #db76a0;
+
+    cursor: pointer;
+
+    text-shadow:
+        0 0 25px rgba(255, 100, 180, 0.5);
+
+    transition:
+        color 0.6s ease,
+        filter 0.6s ease,
+        transform 0.3s ease;
+}
+
+.broken-repair {
+    filter:
+        grayscale(0.7)
+        brightness(0.55);
+
+    transform:
+        scale(0.85);
+}
+
+.fully-repaired {
+    color: #f0a9c6;
+
+    filter:
+        none;
+
+    transform:
+        scale(1.1);
+
+    text-shadow:
+        0 0 35px rgba(255, 120, 190, 0.75);
+}
+
+.repair-pulse {
+    animation:
+        repairPulse 0.3s ease;
+}
+
+@keyframes repairPulse {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+#repairText {
+    min-height: 45px;
+
+    max-width: 380px;
+
+    margin: auto;
+
+    line-height: 1.7;
+
+    opacity: 0.75;
+}
+
+
+/* =========================================
+   APOLOGY
+========================================= */
+
+.apology-scene {
+    text-align: center;
+
+    width: min(90vw, 480px);
+}
+
+.apology-scene h2 {
+    font-size: 2.8rem;
+
+    margin: 15px 0 25px;
+
+    color: #f0bfd4;
+}
+
+.apology-scene p:not(.small-text) {
+    margin: 14px auto;
+
+    max-width: 400px;
+
+    line-height: 1.8;
+
+    opacity: 0.76;
+}
+
+.apology-scene button {
+    margin-top: 20px;
+}
+
+
+/* =========================================
+   REEL SCENE
+========================================= */
+
+.reel-scene {
+    width: 100%;
+    max-width: 430px;
+
+    margin: auto;
+
+    text-align: center;
+}
+
+.reel-scene h2 {
+    margin: 10px 0 12px;
+
+    font-size:
+        clamp(1.5rem, 6vw, 2.2rem);
+}
+
+
+/* Portrait Reel frame */
+
+.video-container {
+    width: min(82vw, 360px);
+
+    height: min(58vh, 640px);
+
+    aspect-ratio: 9 / 16;
+
+    margin: 18px auto;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    background: #000;
+
+    box-shadow:
+        0 0 35px rgba(255, 100, 160, 0.25);
+
+    border:
+        1px solid rgba(255, 200, 220, 0.12);
+}
+
+.video-container video {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    background: #000;
+}
+
+
+/* =========================================
+   FINAL SCENE
+========================================= */
+
+.final-scene {
+    width: min(90vw, 500px);
+
+    text-align: center;
+
+    animation:
+        finalAppear 1.2s ease;
+}
+
+.final-scene .symbol {
+    font-size: 3.5rem;
+
+    color: #ed91b5;
+}
+
+.final-scene h2 {
+    margin: 15px 0 25px;
+
+    font-size:
+        clamp(2.3rem, 9vw, 3.5rem);
+
+    color: #f2c3d8;
+}
+
+.final-scene p:not(.small-text) {
+    margin: 14px auto;
+
+    max-width: 410px;
+
+    line-height: 1.9;
+
+    opacity: 0.78;
+}
+
+.final-love {
+    margin-top: 28px !important;
+
+    font-size: 1.45rem;
+
+    color: #f0a0c2;
+
+    text-shadow:
+        0 0 15px rgba(255, 100, 180, 0.35);
+}
+
+.signature {
+    margin-top: 25px;
+
+    font-size: 0.95rem;
+
+    font-style: italic;
+
+    opacity: 0.6;
+}
+
+@keyframes finalAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .opening {
+        padding:
+            25px 16px;
+    }
+
+
+    /* Characters */
+
+    .character.cecilion {
+        width: 75vw;
+        height: 70vh;
+
+        left: -18%;
+        bottom: 0;
+    }
+
+    .character.carmilla {
+        width: 75vw;
+        height: 74vh;
+
+        right: -18%;
+        bottom: 0;
+    }
+
+
+    /* Together image */
+
+    .character.together {
+        object-position:
+            center center;
+    }
+
+
+    /* Intro */
+
+    .intro {
+        width: 94vw;
+    }
+
+
+    /* Moon */
+
+    .moon {
+        width: 110px;
+        height: 110px;
+
+        top: 6%;
+    }
+
+
+    /* Hearts */
+
+    .heart {
+        font-size: 5rem;
+    }
+
+    .broken-heart-large span {
+        font-size: 6rem;
+    }
+
+
+    /* Reel */
+
+    .reel-scene {
+        width: 100%;
+    }
+
+    .video-container {
+        width: min(82vw, 360px);
+
+        height: min(58vh, 600px);
+
+        margin:
+            15px auto;
+    }
+
+    .video-container video {
+        width: 100%;
+        height: 100%;
+
+        object-fit: contain;
+    }
+
+
+    /* Final message */
+
+    .final-scene {
+        width: 92vw;
+    }
+
+    .final-scene p:not(.small-text) {
+        line-height: 1.75;
+    }
+}
+
+
+/* =========================================
+   VERY SHORT PHONES
+========================================= */
+
+@media (max-height: 700px) {
+
+    .video-container {
+        height: 52vh;
+    }
+
+    .reel-scene h2 {
+        margin: 5px 0 8px;
+    }
+
+    .reel-scene .small-text {
+        font-size: 0.68rem;
+    }
+}
+
+
+/* =========================================
+   REDUCE MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        scroll-behavior: auto !important;
+
+        transition-duration:
+            0.01ms !important;
+    }
+}
