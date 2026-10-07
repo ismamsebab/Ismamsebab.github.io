@@ -4,7 +4,7 @@ enterButton.addEventListener("click", startHeartScene);
 
 
 /* =========================================
-   IMAGE HELPERS
+   CHARACTER MOOD
 ========================================= */
 
 function setCharacterMood(opacity, brightness, saturation) {
@@ -13,21 +13,15 @@ function setCharacterMood(opacity, brightness, saturation) {
     const carmilla = document.querySelector(".carmilla");
 
     if (cecilion) {
-
         cecilion.style.opacity = opacity;
-
         cecilion.style.filter =
             `brightness(${brightness}) saturate(${saturation})`;
-
     }
 
     if (carmilla) {
-
         carmilla.style.opacity = opacity;
-
         carmilla.style.filter =
             `brightness(${brightness}) saturate(${saturation})`;
-
     }
 }
 
@@ -99,7 +93,6 @@ const mistakes = [
 
     {
         number: "01",
-
         title: "The morning",
 
         text:
@@ -109,13 +102,11 @@ const mistakes = [
             "But you were dealing with trouble at home... and I didn't understand that.",
 
         heart: 75,
-
         crack: "crack-1"
     },
 
     {
         number: "02",
-
         title: "I didn't protect you",
 
         text:
@@ -125,13 +116,11 @@ const mistakes = [
             "But I failed to protect you from the enemies.",
 
         heart: 50,
-
         crack: "crack-2"
     },
 
     {
         number: "03",
-
         title: "I let you sleep upset",
 
         text:
@@ -141,7 +130,6 @@ const mistakes = [
             "And I still let you go to sleep that way.",
 
         heart: 25,
-
         crack: "crack-3"
     }
 
@@ -182,17 +170,14 @@ function showMistake(index) {
     const mistake = mistakes[index];
 
 
-    /*
-        The characters become darker
-        as the heart takes damage.
-    */
+    /* Character gets darker as mistakes happen */
 
     if (index === 0) {
 
         setCharacterMood(
-            "0.34",
-            "0.48",
-            "0.75"
+            "0.28",
+            "0.42",
+            "0.65"
         );
 
     }
@@ -200,9 +185,9 @@ function showMistake(index) {
     else if (index === 1) {
 
         setCharacterMood(
-            "0.25",
-            "0.40",
-            "0.63"
+            "0.18",
+            "0.32",
+            "0.50"
         );
 
     }
@@ -210,9 +195,9 @@ function showMistake(index) {
     else if (index === 2) {
 
         setCharacterMood(
-            "0.14",
-            "0.32",
-            "0.50"
+            "0.08",
+            "0.22",
+            "0.30"
         );
 
     }
@@ -309,19 +294,14 @@ function acceptMistake() {
 
 function showBrokenHeart() {
 
-    const intro = document.querySelector(".intro");
-
-
-    /*
-        Everything becomes almost completely dark.
-    */
-
     setCharacterMood(
         "0.03",
         "0.18",
         "0.0"
     );
 
+
+    const intro = document.querySelector(".intro");
 
     intro.innerHTML = `
 
@@ -423,10 +403,7 @@ function showRealization() {
 
         document
             .getElementById("continueButton")
-            .addEventListener(
-                "click",
-                showBasantiScene
-            );
+            .addEventListener("click", showBasantiScene);
 
     }, 1000);
 }
@@ -490,10 +467,7 @@ function showBasantiScene() {
 
         document
             .getElementById("warmButton")
-            .addEventListener(
-                "click",
-                startWarmScene
-            );
+            .addEventListener("click", startWarmScene);
 
     }, 900);
 }
@@ -508,10 +482,8 @@ function startWarmScene() {
     document.body.classList.add("warm-mode");
 
 
-    /*
-        Individual characters fade out.
-        Together image comes forward.
-    */
+    /* Fade the individual characters into
+       the background */
 
     setCharacterMood(
         "0.08",
@@ -520,15 +492,19 @@ function startWarmScene() {
     );
 
 
+    /* Show Carmilla + Cecilion together */
+
     const together =
         document.querySelector(".together");
 
     if (together) {
 
-        together.style.opacity = "0.28";
+        together.style.opacity = "0.70";
+
+        together.style.visibility = "visible";
 
         together.style.filter =
-            "brightness(0.65) saturate(1.05)";
+            "brightness(0.82) saturate(1.10)";
 
         together.style.transform =
             "scale(1)";
@@ -582,10 +558,7 @@ function startWarmScene() {
 
         document
             .getElementById("repairButton")
-            .addEventListener(
-                "click",
-                startRepair
-            );
+            .addEventListener("click", startRepair);
 
     }, 900);
 }
@@ -632,10 +605,7 @@ function startRepair() {
 
         document
             .getElementById("repairHeart")
-            .addEventListener(
-                "click",
-                repairHeart
-            );
+            .addEventListener("click", repairHeart);
 
     }, 700);
 }
@@ -656,15 +626,15 @@ function repairHeart() {
     const text =
         document.getElementById("repairText");
 
+
     repairCount++;
+
 
     heart.classList.add("repair-pulse");
 
     setTimeout(() => {
 
-        heart.classList.remove(
-            "repair-pulse"
-        );
+        heart.classList.remove("repair-pulse");
 
     }, 300);
 
@@ -710,14 +680,13 @@ function repairHeart() {
         text.innerHTML =
             "♡ Thank you for hearing me. ♡";
 
+
         setTimeout(() => {
 
             showApology();
 
         }, 1800);
-
     }
-
 }
 
 
@@ -771,22 +740,149 @@ function showApology() {
 
         fadeIn(intro);
 
+
         document
             .getElementById("reelButton")
-            .addEventListener("click", () => {
-
-                alert(
-                    "Your Reel will go here ❤️"
-                );
-
-            });
+            .addEventListener(
+                "click",
+                showReel
+            );
 
     }, 900);
 }
 
 
 /* =========================================
-   HELPERS
+   REEL / VIDEO
+========================================= */
+
+function showReel() {
+
+    const intro = document.querySelector(".intro");
+
+    fadeOut(intro);
+
+    setTimeout(() => {
+
+        intro.innerHTML = `
+
+            <div class="reel-scene">
+
+                <p class="small-text">
+                    One last thing...
+                </p>
+
+                <h2>
+                    For you, Sabu ❤️
+                </h2>
+
+                <div class="video-container">
+
+                    <video
+                        id="reelVideo"
+                        controls
+                        playsinline
+                        preload="metadata"
+                    >
+
+                        <source
+                            src="assets/reel.mp4"
+                            type="video/mp4"
+                        >
+
+                        Your browser does not support video.
+
+                    </video>
+
+                </div>
+
+                <button id="finalButton">
+
+                    Continue ♡
+
+                </button>
+
+            </div>
+
+        `;
+
+        fadeIn(intro);
+
+
+        document
+            .getElementById("finalButton")
+            .addEventListener(
+                "click",
+                showFinalMessage
+            );
+
+    }, 900);
+}
+
+
+/* =========================================
+   FINAL MESSAGE
+========================================= */
+
+function showFinalMessage() {
+
+    const intro = document.querySelector(".intro");
+
+    fadeOut(intro);
+
+    setTimeout(() => {
+
+        intro.innerHTML = `
+
+            <div class="final-scene">
+
+                <div class="symbol">
+                    ♥
+                </div>
+
+                <p class="small-text">
+                    Sabu...
+                </p>
+
+                <h2>
+                    I'm sorry.
+                </h2>
+
+                <p>
+                    I know I made mistakes.
+                </p>
+
+                <p>
+                    I don't want to just say
+                    I'm sorry.
+                </p>
+
+                <p>
+                    I want to understand you better,
+                    take better care of your heart,
+                    and do better for you.
+                </p>
+
+                <p class="final-love">
+                    I love you. ❤️
+                </p>
+
+                <div class="signature">
+                    — Your Cecilion
+                </div>
+
+            </div>
+
+        `;
+
+        fadeIn(intro);
+
+    }, 900);
+}
+
+
+/* =========================================
+   FADE HELPERS
 ========================================= */
 
 function fadeOut(element) {
