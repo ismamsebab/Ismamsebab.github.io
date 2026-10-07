@@ -232,7 +232,6 @@ function showMistake(index) {
 /* =========================================
    ACCEPT MISTAKE
 ========================================= */
-
 function acceptMistake() {
 
     const intro = document.querySelector(".intro");
@@ -259,6 +258,8 @@ function acceptMistake() {
 }
 
 
+     
+
 /* =========================================
    BROKEN HEART
 ========================================= */
@@ -267,19 +268,18 @@ function showBrokenHeart() {
 
     const intro = document.querySelector(".intro");
 
-    /*
-        Everything disappears when the heart reaches zero.
-    */
+    // Fade the characters almost completely away
+    if (cecilionImage) {
+        cecilionImage.style.opacity = "0.03";
+        cecilionImage.style.filter =
+            "brightness(0.18) grayscale(1)";
+    }
 
-    cecilionImage.style.opacity = "0.03";
-    carmillaImage.style.opacity = "0.03";
-
-    cecilionImage.style.filter =
-        "brightness(0.18) grayscale(1)";
-
-    carmillaImage.style.filter =
-        "brightness(0.18) grayscale(1)";
-
+    if (carmillaImage) {
+        carmillaImage.style.opacity = "0.03";
+        carmillaImage.style.filter =
+            "brightness(0.18) grayscale(1)";
+    }
 
     intro.innerHTML = `
 
@@ -322,11 +322,14 @@ function showBrokenHeart() {
 
     `;
 
-    document
-        .getElementById("realizationButton")
-        .addEventListener("click", showRealization);
-}
+    const realizationButton =
+        document.getElementById("realizationButton");
 
+    realizationButton.addEventListener(
+        "click",
+        showRealization
+    );
+}
 
 /* =========================================
    BASANTI SCENE
