@@ -20,14 +20,18 @@ body {
             #05050a 100%
         );
 
-    color: #ffffff;
-    font-family: Georgia, "Times New Roman", serif;
+    color: white;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 }
 
 
-/* -------------------------
-   Opening scene
-------------------------- */
+/* =========================
+   MAIN SCENE
+========================= */
 
 .opening {
     position: relative;
@@ -37,6 +41,7 @@ body {
     height: 100dvh;
 
     display: flex;
+
     justify-content: center;
     align-items: center;
 
@@ -44,9 +49,9 @@ body {
 }
 
 
-/* -------------------------
-   Moon
-------------------------- */
+/* =========================
+   MOON
+========================= */
 
 .moon {
     position: absolute;
@@ -59,7 +64,8 @@ body {
 
     border-radius: 50%;
 
-    background: rgba(255, 170, 210, 0.08);
+    background:
+        rgba(255, 170, 210, 0.08);
 
     box-shadow:
         0 0 40px rgba(255, 80, 150, 0.08),
@@ -67,23 +73,27 @@ body {
 }
 
 
-/* -------------------------
-   Main text
-------------------------- */
+/* =========================
+   MAIN CONTENT
+========================= */
 
 .intro {
     position: relative;
 
     z-index: 2;
 
-    text-align: center;
-
     width: 90%;
     max-width: 500px;
 
-    animation: appear 2.5s ease forwards;
+    text-align: center;
+
+    animation: appear 1.5s ease forwards;
 }
 
+
+/* =========================
+   TEXT
+========================= */
 
 .symbol {
     font-size: 55px;
@@ -96,25 +106,30 @@ body {
         0 0 15px rgba(255, 80, 160, 0.5),
         0 0 35px rgba(255, 50, 140, 0.25);
 
-    animation: heartbeat 3s ease-in-out infinite;
+    animation:
+        heartbeat 3s ease-in-out infinite;
 }
 
 
 .small-text {
-    font-size: 14px;
+
+    font-size: 13px;
 
     letter-spacing: 4px;
 
     text-transform: uppercase;
 
-    color: rgba(255, 220, 235, 0.55);
+    color:
+        rgba(255, 220, 235, 0.55);
 
     margin-bottom: 12px;
 }
 
 
 h1 {
-    font-size: clamp(55px, 15vw, 90px);
+
+    font-size:
+        clamp(55px, 15vw, 90px);
 
     font-weight: normal;
 
@@ -130,35 +145,61 @@ h1 {
 }
 
 
-.subtitle {
+h2 {
+
+    font-size:
+        clamp(30px, 8vw, 48px);
+
+    font-weight: normal;
+
+    color: #f5b4d0;
+
+    margin-bottom: 25px;
+}
+
+
+.subtitle,
+.heart-description,
+.mistake-text,
+.realization,
+.realization-scene p,
+.broken-scene p {
+
     font-size: 16px;
 
     line-height: 1.8;
 
-    color: rgba(255, 235, 245, 0.68);
-
-    margin-bottom: 45px;
+    color:
+        rgba(255, 235, 245, 0.68);
 }
 
 
-/* -------------------------
-   Enter button
-------------------------- */
+/* =========================
+   BUTTONS
+========================= */
 
-#enterButton {
+button {
+
     appearance: none;
 
-    border: 1px solid rgba(255, 160, 200, 0.35);
+    border:
+        1px solid
+        rgba(255, 160, 200, 0.35);
 
-    background: rgba(255, 100, 170, 0.07);
+    background:
+        rgba(255, 100, 170, 0.07);
 
-    color: #ffd9e9;
+    color:
+        #ffd9e9;
 
-    padding: 14px 28px;
+    padding:
+        14px 28px;
 
     border-radius: 50px;
 
-    font-family: Georgia, serif;
+    font-family:
+        Georgia,
+        serif;
 
     font-size: 15px;
 
@@ -173,34 +214,309 @@ h1 {
 }
 
 
-#enterButton span {
+button span {
     margin-left: 8px;
 
     color: #ff8fbd;
 }
 
 
-#enterButton:hover {
-    transform: translateY(-2px);
+button:hover {
 
-    background: rgba(255, 100, 170, 0.15);
+    transform:
+        translateY(-2px);
+
+    background:
+        rgba(255, 100, 170, 0.15);
 
     box-shadow:
-        0 0 25px rgba(255, 70, 150, 0.15);
+        0 0 25px
+        rgba(255, 70, 150, 0.15);
 }
 
 
-#enterButton:active {
-    transform: scale(0.95);
+button:active {
+
+    transform:
+        scale(0.95);
 }
 
 
-/* -------------------------
-   Particles
-------------------------- */
+/* =========================
+   HEART INTRO
+========================= */
+
+.heart-scene {
+
+    animation:
+        heartSceneAppear 1s ease;
+}
+
+
+.heart-container {
+
+    position: relative;
+
+    width: 150px;
+    height: 150px;
+
+    margin:
+        20px auto 10px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+
+.heart {
+
+    position: relative;
+
+    z-index: 2;
+
+    font-size: 115px;
+
+    color: #e94d83;
+
+    line-height: 1;
+
+    text-shadow:
+        0 0 15px rgba(255, 50, 120, 0.8),
+        0 0 40px rgba(255, 50, 120, 0.35);
+
+    animation:
+        heartbeat 1.8s ease-in-out infinite;
+}
+
+
+.heart-glow {
+
+    position: absolute;
+
+    width: 110px;
+    height: 110px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 40, 110, 0.12);
+
+    filter:
+        blur(25px);
+
+    animation:
+        heartGlow 2s ease-in-out infinite;
+}
+
+
+.heart-number {
+
+    font-size: 28px;
+
+    color: #ffd1e1;
+
+    margin-bottom: 8px;
+}
+
+
+.heart-description {
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================
+   MISTAKES
+========================= */
+
+.mistake-scene {
+
+    animation:
+        heartSceneAppear 0.8s ease;
+}
+
+
+.mistake-number {
+
+    font-size: 12px;
+
+    letter-spacing: 5px;
+
+    color:
+        rgba(255, 170, 200, 0.45);
+
+    margin-bottom: 15px;
+}
+
+
+.mistake-heart {
+
+    width: 90px;
+    height: 90px;
+
+    margin:
+        10px auto 25px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 50, 120, 0.06);
+
+    box-shadow:
+        0 0 35px
+        rgba(255, 50, 120, 0.08);
+}
+
+
+.mistake-heart span {
+
+    font-size: 70px;
+
+    color: #c93670;
+
+    text-shadow:
+        0 0 15px
+        rgba(255, 50, 120, 0.45);
+}
+
+
+.mistake-text {
+
+    color:
+        rgba(255, 240, 247, 0.9);
+
+    margin-bottom: 18px;
+}
+
+
+.realization {
+
+    font-style: italic;
+
+    color:
+        rgba(255, 190, 215, 0.65);
+
+    margin-bottom: 25px;
+}
+
+
+.heart-status {
+
+    font-size: 20px;
+
+    color:
+        #e75a8d;
+
+    margin-bottom: 28px;
+
+    text-shadow:
+        0 0 10px
+        rgba(255, 50, 120, 0.4);
+}
+
+
+/* =========================
+   BROKEN HEART
+========================= */
+
+.broken-scene {
+
+    animation:
+        heartSceneAppear 1s ease;
+}
+
+
+.broken-heart {
+
+    font-size: 100px;
+
+    margin:
+        15px 0 10px;
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(255, 50, 100, 0.25)
+        );
+}
+
+
+.broken-status {
+
+    color:
+        #7d304c;
+
+    margin-bottom: 25px;
+}
+
+
+.broken-scene h2 {
+
+    color:
+        #c87998;
+}
+
+
+.broken-scene p {
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================
+   REALIZATION
+========================= */
+
+.realization-scene {
+
+    animation:
+        heartSceneAppear 1.2s ease;
+}
+
+
+.realization-scene h2 {
+
+    margin-bottom: 15px;
+}
+
+
+.realization-scene p {
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================
+   FADE
+========================= */
+
+.mistake-fade {
+
+    opacity: 0 !important;
+
+    transform:
+        translateY(15px);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+}
+
+
+/* =========================
+   PARTICLES
+========================= */
 
 .particles::before,
 .particles::after {
+
     content: "";
 
     position: absolute;
@@ -210,44 +526,90 @@ h1 {
 
     border-radius: 50%;
 
-    background: rgba(255, 180, 215, 0.5);
+    background:
+        rgba(255, 180, 215, 0.5);
 
     box-shadow:
-        10vw 15vh rgba(255, 180, 215, 0.25),
-        25vw 70vh rgba(255, 180, 215, 0.35),
-        40vw 25vh rgba(255, 180, 215, 0.2),
-        55vw 80vh rgba(255, 180, 215, 0.3),
-        70vw 35vh rgba(255, 180, 215, 0.25),
-        85vw 65vh rgba(255, 180, 215, 0.35),
-        90vw 20vh rgba(255, 180, 215, 0.2);
 
-    animation: floatParticles 10s linear infinite;
+        10vw 15vh
+        rgba(255, 180, 215, 0.25),
+
+        25vw 70vh
+        rgba(255, 180, 215, 0.35),
+
+        40vw 25vh
+        rgba(255, 180, 215, 0.2),
+
+        55vw 80vh
+        rgba(255, 180, 215, 0.3),
+
+        70vw 35vh
+        rgba(255, 180, 215, 0.25),
+
+        85vw 65vh
+        rgba(255, 180, 215, 0.35),
+
+        90vw 20vh
+        rgba(255, 180, 215, 0.2);
+
+    animation:
+        floatParticles 10s linear infinite;
 }
 
 
 .particles::after {
-    animation-delay: -5s;
 
-    opacity: 0.5;
+    animation-delay:
+        -5s;
+
+    opacity:
+        0.5;
 }
 
 
-/* -------------------------
-   Animations
-------------------------- */
+/* =========================
+   ANIMATIONS
+========================= */
 
 @keyframes appear {
 
     from {
+
         opacity: 0;
-        transform: translateY(20px);
+
+        transform:
+            translateY(20px);
     }
 
     to {
+
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+@keyframes heartSceneAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(0.96)
+            translateY(15px);
     }
 
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
 }
 
 
@@ -255,24 +617,53 @@ h1 {
 
     0%,
     100% {
-        transform: scale(1);
+
+        transform:
+            scale(1);
     }
 
     50% {
-        transform: scale(1.12);
+
+        transform:
+            scale(1.12);
+    }
+}
+
+
+@keyframes heartGlow {
+
+    0%,
+    100% {
+
+        opacity:
+            0.5;
+
+        transform:
+            scale(0.9);
     }
 
+    50% {
+
+        opacity:
+            1;
+
+        transform:
+            scale(1.15);
+    }
 }
 
 
 @keyframes floatParticles {
 
     from {
-        transform: translateY(10vh);
+
+        transform:
+            translateY(10vh);
     }
 
     to {
-        transform: translateY(-10vh);
-    }
 
+        transform:
+            translateY(-10vh);
+    }
 }
