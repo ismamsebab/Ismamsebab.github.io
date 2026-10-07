@@ -1,6 +1,4 @@
 const enterButton = document.getElementById("enterButton");
-const cecilionImage = document.querySelector(".cecilion");
-const carmillaImage = document.querySelector(".carmilla");
 
 enterButton.addEventListener("click", startHeartScene);
 
@@ -264,20 +262,24 @@ function acceptMistake() {
    BROKEN HEART
 ========================================= */
 
+
 function showBrokenHeart() {
 
     const intro = document.querySelector(".intro");
 
-    // Fade the characters almost completely away
-    if (cecilionImage) {
-        cecilionImage.style.opacity = "0.03";
-        cecilionImage.style.filter =
+    // Darken the character images
+    const cecilion = document.querySelector(".cecilion");
+    const carmilla = document.querySelector(".carmilla");
+
+    if (cecilion) {
+        cecilion.style.opacity = "0.03";
+        cecilion.style.filter =
             "brightness(0.18) grayscale(1)";
     }
 
-    if (carmillaImage) {
-        carmillaImage.style.opacity = "0.03";
-        carmillaImage.style.filter =
+    if (carmilla) {
+        carmilla.style.opacity = "0.03";
+        carmilla.style.filter =
             "brightness(0.18) grayscale(1)";
     }
 
@@ -322,15 +324,12 @@ function showBrokenHeart() {
 
     `;
 
-    const realizationButton =
-        document.getElementById("realizationButton");
-
-    realizationButton.addEventListener(
-        "click",
-        showRealization
-    );
+    document
+        .getElementById("realizationButton")
+        .addEventListener("click", showRealization);
 }
 
+   
 /* =========================================
    BASANTI SCENE
 ========================================= */
